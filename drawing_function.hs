@@ -104,8 +104,3 @@ drawGameLoop l str = do
     drawSpeachBubble (110-15) str
     drawGenieStacksLoop l 19 110
     putStrLn " "
-
--- testing
-main::IO()
-main = do
-    drawGameLoop [1,12,4,5,6] "olá, eu sou o seu novo gênio da lâmpada, dessa vez não vou te oferecer desejos, mas sim criptoativos. Você já ouviu falar na brascompany? a maior empresa de criptoativos do mercado na atualidade?"
