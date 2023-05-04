@@ -57,9 +57,50 @@ drawSpeachBubble spaces str = do
     putStrLn (makeSpeachBubble 0 spaces "2")
     putStrLn (makeSpeachBubble 0 spaces "3")
 
--- testing
-main::IO()
-main = do
-    drawSpeachBubble 95 "olá, eu sou o seu novo gênio da lâmpada, dessa vez não vou te oferecer desejos, mas sim criptoativos. Você já ouviu falar na brascompany? a maior empresa de criptoativos do mercado na atualidade?"
+-- stacks
+insert :: Int -> String -> String-> String
+insert index str1 str2 = take index str1 ++ str2 ++ drop (index + length str2) str1
+
+blanks:: Int -> String
+blanks n = [' ' | x <- [1..n]]
+
+drawBases:: Int -> String
+drawBases n =  blanks n ++ "[--]"
+
+drawMoney:: Int -> Int -> String
+drawMoney x y| x >= y = blanks (4+2) ++ "$$"
+             | otherwise = blanks (4+2) ++ "  " 
+
+drawStackPillars:: [Int] ->  Int -> String
+drawStackPillars [] length = ""
+drawStackPillars (x:xs) length = drawMoney x (19-length) ++ drawStackPillars xs length
+
+drawStackBase:: [Int] -> Int -> Int -> Int -> String
+drawStackBase l 0 1 length = drawBases length
+drawStackBase l 0 n length = drawStackBase l 0 (n-1) length ++ drawBases length
+
+-- drawOponentLoop:: Int -> Int -> String -> String
+drawGenieWStacks:: [Int] -> Int -> Int -> IO()
+drawGenieWStacks l 19 spaces = do
+    putStrLn (insert 0 (fillSpacesFront spaces (getGennie 19)) (" " ++ drawStackBase l 0 (length l) 4))
+drawGenieWStacks l index spaces = do
+    putStrLn (insert 0 (fillSpacesFront spaces (getGennie index)) (drawStackPillars l index))
+
+drawGenieStacksLoop:: [Int] -> Int -> Int-> IO()
+drawGenieStacksLoop l 1 spaces = drawGenieWStacks l 1 spaces
+drawGenieStacksLoop l n spaces = do
+    drawGenieStacksLoop l (n-1) spaces
+    drawGenieWStacks l n spaces
+
+--main function
+drawMenu:: String -> IO()
+drawMenu str = do
+    drawSpeachBubble 95 str
     drawGenieLoop 19 110
+    putStrLn " "
+
+drawGameLoop:: [Int] -> String -> IO()
+drawGameLoop l str = do
+    drawSpeachBubble (110-15) str
+    drawGenieStacksLoop l 19 110
     putStrLn " "
