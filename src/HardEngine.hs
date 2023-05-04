@@ -1,3 +1,4 @@
+module HardEngine (hard_engine) where 
 import Data.Bits
 
 hard_engine :: [Int] -> [Int]

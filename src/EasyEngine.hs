@@ -1,3 +1,5 @@
+module EasyEngine (easy_engine) where 
+
 easy_engine :: [Int] -> [Int]
 easy_engine list = do
     
