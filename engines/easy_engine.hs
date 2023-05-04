@@ -3,14 +3,11 @@ easy_engine list = do
     
     let idx = small_pos_heap_index list;
     let cnt = count_positive_indexes list;
-    let (begin, mid:end) = splitAt idx list
+    let mid = list !! idx;
 
-    if cnt > 1 then
-        begin ++ [mid - (min mid 3)] ++ end
-    else if mid > 3 then
-        begin ++ [mid - 1] ++ end
-    else
-        begin ++ [0] ++ end
+    if cnt > 1 then [(min mid 3), idx]
+    else if mid > 3 then [1, idx]
+    else [mid, idx]
 
 count_positive_indexes :: [Int] -> Int
 count_positive_indexes [] = 0
