@@ -1,6 +1,6 @@
-module HardEngine (hardEngine) where 
+module Engines.HardEngine (hardEngine) where 
 import Data.Bits
-import RandomEngine
+import Engines.RandomEngine
 
 hardEngine :: [Int] -> (Int,Int)
 hardEngine list = do

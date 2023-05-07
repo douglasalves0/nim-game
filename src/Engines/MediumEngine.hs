@@ -1,5 +1,5 @@
-module MediumEngine (mediumEngine) where
-import RandomEngine
+module Engines.MediumEngine (mediumEngine) where
+import Engines.RandomEngine
 
 makeMove :: Int -> [Int] -> (Int, Int)
 makeMove _ [] = (-1,-1)

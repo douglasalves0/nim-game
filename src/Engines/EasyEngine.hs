@@ -1,4 +1,4 @@
-module EasyEngine (easyEngine) where 
+module Engines.EasyEngine (easyEngine) where 
 
 easyEngine :: [Int] -> (Int,Int)
 easyEngine list = do

@@ -1,5 +1,5 @@
-module DrawingFunction where
-
+module GeniusDraw.DrawingFunctions where
+-- Genie drawing function
 getGennie:: Int -> String
 getGennie 1 = "\\|  /}      "
 getGennie 2 = "./`|´\\     "
