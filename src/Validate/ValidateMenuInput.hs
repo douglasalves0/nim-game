@@ -1,4 +1,4 @@
-module ValidationMenu (validateMenuInput, validateInput) where
+module Validate.ValidateMenuInput (validateMenuInput, validateInput) where
 
 import Data.Char (isDigit)
 

@@ -1,8 +1,6 @@
-module startGame where
+module StartGame where
 
-import MainMenu
-import DrawingFunction 
-
+import Interface.MainMenu (startGame) 
 
 main :: IO()
     startGame "Seja bem vindo(a)! Hoje é o seu dia de sorte, quer dizer, depende do que você considera sorte HAHAHAHAHA. Primeiro tenho que lhe informar que atualmente 

@@ -1,8 +1,8 @@
-module MainMenu where
+module Interface.MainMenu where
 
-import DrawingFunction 
-import validateMenuInput
-import GameLoop
+import GeniusDraw.DrawingFunctions (drawStartGenie, drawMenuGenie, drawHintGenie)
+import Validate.ValidateMenuInput
+import Game.GameLoop
 import System.Random
 
 createDifficulty :: String -> IO()
@@ -41,15 +41,16 @@ getMenu option
                             createDifficulty 
                     else 
                         getMenu 1
+    -- create lines 
     | option == 2 = do 
                     drawHintGenie "Abaixo de apresento os meus desafios e a forma de chamar alguém para dividir essa oportunidade de ganhar as criptomoedas!" ["Primeira Linha", "Segunda Linha"]
                     x <- getLine
-                    mainMenu
-
+                    mainMenu "Agora que já conhece os meus desafios, escolha uma das opções abaixo."
+    -- create lines 
     | option == 3 = do 
                     drawHintGenie "Posso te confessar que isso será muito díficil, porém irei te ensinar como executar o desafio!" ["Primeira Linha", "Segunda Linha"]
                     x <- getLine
-                    mainMenu
+                    mainMenu "Agora que já tem uma ideia de como executar o meu desafio, escolha uma das opções abaixo."
 
     | option == 4 = drawStartGenie "Eu bem que desconfiei que você não seria forte o bastante!"
 
@@ -63,7 +64,6 @@ startGame openingSentence = do
         else 
             drawStartGenie "Quem desiste sem ao menos tentar uma vez não merece as minhas criptomoedas!"
 
---Create Function for drawing Menu with options
 mainMenu :: String -> IO()
 mainMenu fraseInicial = do
     drawMenuGenie fraseInicial "MENU" [" 1 | Iniciar Desafio" , "2 | Tipos de Desafio" , "3 | Como Realizar o Desafio", "4 | Desistir do Desafio"]

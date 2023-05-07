@@ -1,4 +1,4 @@
-module Player.ValidatePlayerInput where
+module Validate.ValidatePlayerInput where
 import Data.Char (isDigit)
 
 validatePlayerInput :: String -> String -> [Int] -> String

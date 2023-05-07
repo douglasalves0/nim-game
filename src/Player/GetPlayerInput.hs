@@ -1,6 +1,6 @@
 module Player.GetPlayerInput where
-import Player.ValidatePlayerInput
-import GeniusDraw.DrawingFunctions
+import Validate.ValidatePlayerInput
+import GeniusDraw.DrawingFunctions (drawGameLoop)
 
 getPlayerInput :: [Int] -> String -> IO (Int, Int)
 getPlayerInput stack frase1 = do
