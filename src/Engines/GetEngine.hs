@@ -5,6 +5,6 @@ import Engines.HardEngine
 import Engines.MediumEngine
 
 getEngine :: Int -> (([Int])->(Int,Int))
-getEngine 0 = easyEngine
-getEngine 1 = mediumEngine
-getEngine 2 = hardEngine
+getEngine 1 = easyEngine
+getEngine 2 = mediumEngine
+getEngine 3 = hardEngine
