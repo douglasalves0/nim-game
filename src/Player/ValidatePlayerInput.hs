@@ -1,4 +1,4 @@
-module Validation (validatePlayerInput) where
+module Player.Validation (validatePlayerInput) where
 
 validatePlayerInput::T->T->[Int]->String                                                                                    
 

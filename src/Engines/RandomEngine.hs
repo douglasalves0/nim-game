@@ -1,4 +1,4 @@
-module RandomEngine (randomEngine) where
+module Engines.RandomEngine (randomEngine) where
 import System.Random
 
 randomNumber :: Int -> Int -> Int

@@ -1,4 +1,4 @@
-import Validation
+import Player.Validation
 
 getPlayerInput::([Int])=>(Int,Int)->[Int]->IO()
 
