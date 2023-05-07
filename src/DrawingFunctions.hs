@@ -92,6 +92,22 @@ drawGenieWmenu:: Int -> Int -> Int -> String -> [String] -> IO()
 drawGenieWmenu index spaces menuSize menuName options = do
     putStrLn (drawGenieWMenuLoop index spaces (fullMenu menuSize menuName options))
 
+-- hint
+createHint::Int -> [String] -> [String]
+createHint size l = [boxDivider size] ++ ["|" ++ fillSpacesLast size x ++"|"| x <- l] ++ [boxDivider size]
+
+fullHint:: Int -> [String] -> [String]
+fullHint size l = createHint size l ++ createBlankLines (19-length l)
+
+drawHintLoop:: Int -> Int -> [String] -> String
+drawHintLoop 1 spaces l = insert 4 (fitGenie spaces 19) (head l)
+drawHintLoop index spaces (x:xs) = insert 4 (fitGenie spaces (20-index)) x ++ "\n" ++ drawHintLoop (index-1) spaces xs
+
+drawHint:: Int -> Int -> Int -> [String] -> IO()
+drawHint index spaces menuSize l = do
+    putStrLn (drawHintLoop index spaces (fullHint menuSize l))
+
+
 -- stacks
 insert :: Int -> String -> String-> String
 insert index str1 str2 = take index str1 ++ str2 ++ drop (index + length str2) str1
@@ -137,6 +153,12 @@ drawMenuGenie:: String -> String -> [String] -> IO()
 drawMenuGenie speach menuName options = do
     drawSpeachBubble 95 speach
     drawGenieWmenu 19 110 30 menuName options
+    putStrLn " "
+
+drawHintGenie:: String -> [String] -> IO()
+drawHintGenie speach l = do
+    drawSpeachBubble 95 speach
+    drawHint 19 110 50 l
     putStrLn " "
 
 drawGameLoop:: [Int] -> String -> IO()
