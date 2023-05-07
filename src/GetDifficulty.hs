@@ -5,6 +5,6 @@ import MediumEngine
 import HardEngine
 
 getDifficulty :: Int -> (([Int])->(Int,Int))
-getDifficulty 0 = easyEngine
-getDifficulty 1 = mediumEngine
-getDifficulty 2 = hardEngine
+getDifficulty 1 = easyEngine
+getDifficulty 2 = mediumEngine
+getDifficulty 3 = hardEngine

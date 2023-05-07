@@ -1,13 +1,28 @@
 import Validation
 
-getPlayerInput::([Int])=>(Int,Int)->[Int]->IO()
+
+
+
+getPlayerInput :: [Int] -> IO()
+getPlayerInput stack = do
+
+    drawGameLoop stack "Digite a pilha de que voce quer tirar as moedas:"
+    playerStackMove <- readLn
+
+    drawGameLoop stack "Digite a quantidade de moedas que voce quer retirar:"
+    playerCoinMove <- readLn
+
+
+
+
+
+
 
 getPlayerInput secondPlayerMoveFunction stack = do
     putStrLn "Digite a quantidade de moedas que voce quer retirar:\n-> "
     playerCoinMove <- readLn
     
-    putStrLn "Digite a pilha de que voce quer tirar as moedas:\n-> "
-    playerStackMove <- readLn
+    
 
     let errorFirstMove = validatePlayerInput((read playerCoinMove) (read playerStackMove) stack)
     if errorFirstMove != "" then
