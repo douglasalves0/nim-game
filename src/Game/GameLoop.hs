@@ -1,9 +1,9 @@
 module Game.GameLoop where
 
-import GeniusDraw.DrawingFunctions
 import Engines.GetEngine
 import Player.GetPlayerInput
 import Control.Concurrent (threadDelay)
+import GeniusDraw.DrawingFunctions (drawStartGenie)
 
 gameLoop :: [Int] -> Bool -> Int -> IO ()
 -- stack isBot level
@@ -34,7 +34,8 @@ gameVersusBot stack level = do
     let stack2 = newStack stack input 
     if winned stack2 then drawStartGenie "Player 1 Ganhou!" else do
         let botMove = bot stack2
-        print (show botMove)
-        threadDelay 2000000
+        drawStartGenie "Hmmm! Vou tirar " ++ head botMove ++ "moedas da pilha " ++ show botMove !! 1
+        threadDelay 2000000 
+        
         let stack3 = newStack stack2 botMove
         if winned stack3 then drawStartGenie "Bot Ganhou!" else gameVersusBot stack3 level
