@@ -59,6 +59,7 @@ drawSpeachBubble spaces str = do
     putStrLn (makeSpeachBubble 0 spaces "2")
     putStrLn (makeSpeachBubble 0 spaces "3")
 
+
 -- menu
 fitToMiddle:: String -> String -> String
 fitToMiddle str1 str2 = take (div (length str1-length str2) 2) str1 ++ str2 ++ drop (div (length str1+length str2) 2) str1
@@ -85,12 +86,13 @@ createBlankLines:: Int -> [String]
 createBlankLines n = [" " | x <- [1..n]]
 
 drawGenieWMenuLoop:: Int -> Int -> [String] -> String
-drawGenieWMenuLoop 1 spaces l = insert (div (spaces-20) 4) (fitGenie spaces 19) (head l)
-drawGenieWMenuLoop index spaces (x:xs) = insert (div (spaces-20) 4) (fitGenie spaces (20-index)) x ++ "\n" ++ drawGenieWMenuLoop (index-1) spaces xs
+drawGenieWMenuLoop 1 spaces l = insert 4 (fitGenie spaces 19) (head l)
+drawGenieWMenuLoop index spaces (x:xs) = insert 4 (fitGenie spaces (20-index)) x ++ "\n" ++ drawGenieWMenuLoop (index-1) spaces xs
 
 drawGenieWmenu:: Int -> Int -> Int -> String -> [String] -> IO()
 drawGenieWmenu index spaces menuSize menuName options = do
     putStrLn (drawGenieWMenuLoop index spaces (fullMenu menuSize menuName options))
+
 
 -- hint
 createHint::Int -> [String] -> [String]
@@ -142,6 +144,7 @@ drawGenieStacksLoop l n spaces = do
     drawGenieStacksLoop l (n-1) spaces
     drawGenieWStacks l n spaces
 
+
 --main function
 drawStartGenie:: String -> IO()
 drawStartGenie str = do
@@ -152,7 +155,7 @@ drawStartGenie str = do
 drawMenuGenie:: String -> String -> [String] -> IO()
 drawMenuGenie speach menuName options = do
     drawSpeachBubble 95 speach
-    drawGenieWmenu 19 110 30 menuName options
+    drawGenieWmenu 19 110 50 menuName options
     putStrLn " "
 
 drawHintGenie:: String -> [String] -> IO()
