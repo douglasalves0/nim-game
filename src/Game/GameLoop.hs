@@ -34,7 +34,8 @@ gameVersusBot stack level = do
     let stack2 = newStack stack input 
     if winned stack2 then drawStartGenie "Player 1 Ganhou!" else do
         let botMove = bot stack2
-        drawStartGenie "Hmmm! Vou tirar " ++ head botMove ++ "moedas da pilha " ++ show botMove !! 1
+        drawStartGenie ("Hmmm! Vou tirar " ++ show (fst botMove) ++ " moedas da pilha " ++ show (snd botMove))
+
         threadDelay 2000000 
         
         let stack3 = newStack stack2 botMove
