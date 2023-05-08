@@ -8,7 +8,7 @@ challengeTypes =
   [ "Desafio com 10 moedas --> Fácil:",
     "     Nesse desafio eu vou pegar leve com você!",
     "     Vou dividir 10 das minhas moedas em 3 pilhas,",
-    "     vamor começar leve.",
+    "     vamos começar leve.",
     "",
     "Desafio com 15 moedas --> Médio:",
     "     Como eu havia avisado quanto maior a",
@@ -19,7 +19,7 @@ challengeTypes =
     "Desafio com 20 moedas --> Difícil:",
     "",
     "     Esse eu sei que você nunca irá vencer",
-    "     então irei te oferecer todo o resto de ",
+    "     então irei te oferecer todo o restante das ",
     "     minhas moedas(20) divididas em 5 pilhas."
   ]
 
@@ -27,7 +27,7 @@ performsChallenge :: [String]
 performsChallenge =
   [ "Para executar os desafio você deve digitar a pilha",
     "que deseja retirar as moedas e a quantidade de",
-    "moedas que deseja retirar, por exemplo: ",
+    "moedas, um valor por vez, veja esse exemplo: ",
     " -------> (1 2) irá retirar 2 moedas da pilha 1.",
     "",
     "Lembre-se que você só pode retirar moedas de uma",
@@ -48,7 +48,7 @@ presentsChallengesPerforms :: String
 presentsChallengesPerforms =
   unwords
     [ "Posso te confessar que isso será muito díficil, porém irei te ensinar",
-      "como executar o desafio! [APERTE ENTER PARAR CONTINUAR]"
+      "como executar o desafio! [APERTE ENTER PARA CONTINUAR]"
     ]
 
 presentsChallengesTypes :: String
@@ -57,7 +57,7 @@ presentsChallengesTypes =
     [ "Abaixo te apresento os meus desafios, caso esteja com medo de me enfrentar",
       "escolha um outro    jogador para dividir essa oportunidade de conquistar as",
       "minhas criptomoedas!                  ",
-      "[APERTE ENTER PARAR CONTINUAR]"
+      "[APERTE ENTER PARA CONTINUAR]"
     ]
 
 presentsChallenges :: String
@@ -83,7 +83,7 @@ presentsOpponents =
   unwords
     [ "Abaixo te apresento as duas maneiras para conquistar minhas criptomoedas,",
       "caso você queira     chamar um amigo para dividir essa oportunidade de ganhar",
-      "as minhas criptomoedas lhe oferecerei 15 moedas. Digite uma das opções."
+      "as minhas criptomoedas, lhe oferecerei 15 moedas. Digite uma das opções."
     ]
 
 opponentsMenuTitle :: String
@@ -149,9 +149,8 @@ mainMenuOptions =
 presentsNamePlayer :: String
 presentsNamePlayer =
   unwords
-    [ "Antes de iniciarmos o desafio, gostaria de",
-      "saber o seu nome, assim poderei te chamar pelo nome e não de desafiante.",
-      "Digite o seu nome abaixo."
+    [ "Antes de iniciarmos o desafio, gostaria de saber o seu nome, assim poderei",
+    "te chamar pelo nome e não de desafiante. Digite o seu nome abaixo."
     ]
 
 presentsNamePlayer1 :: String
@@ -173,8 +172,6 @@ presentsNamePlayer2 =
 presentsNameError :: String
 presentsNameError = "Digite um nome válido para darmos continuidade ao desafio."
 
-clear :: String
-clear = "clear"
 
 -- Star Game String
 initialPresentation :: String
@@ -191,8 +188,8 @@ initialPresentation =
 player1Turn :: String
 player1Turn =
   unwords
-    [ ", é a sua vez de jogar!                                                                           ",
-      "[APERTE ENTER PARAR CONTINUAR E INFORMAR SUA JOGADA.]"
+    [ ", é a sua vez de jogar!                                                                        ",
+      "[APERTE ENTER PARA CONTINUAR E INFORMAR SUA JOGADA.]"
     ]
 
 player1Winner :: String
@@ -200,7 +197,7 @@ player1Winner =
   unwords
     [ ", você venceu o desafio!",
       "Agora você pode levar todas as minhas criptomoedas!         ",
-      "Use essa chave para acessar a carteira digital.                                              ",
+      "Use essa chave para acessar a carteira digital:                                         ",
       "  ----------> Chave de acesso: 86357cd29761145ac5aecaa3b8053f0d2c809b6387ff11a318d4898282db6b3d",
       "Obrigado por me desafiar, me diverti com você!"
     ]
@@ -210,7 +207,7 @@ player2Winner =
   unwords
     [ ", você venceu o desafio!",
       "Agora você pode levar todas as minhas criptomoedas!       ",
-      "Use essa chave para acessar a carteira digital.                                              ",
+      "Use essa chave para acessar a carteira digital:                                              ",
       "  ----------> Chave de acesso: 86357cd29761145ac5aecaa3b8053f0d2c809b6387ff11a318d4898282db6b3d",
       "Agora você quem decide se irá dividir as criptomoedas com o seu amigo ou não."
     ]
@@ -218,8 +215,8 @@ player2Winner =
 player2Turn :: String
 player2Turn =
   unwords
-    [ ", é a sua vez de jogar!                                                                   ",
-      "[APERTE ENTER PARAR CONTINUAR E INFORMAR SUA JOGADA.]"
+    [ ", é a sua vez de jogar!                                                                ",
+      "[APERTE ENTER PARA CONTINUAR E INFORMAR SUA JOGADA.]"
     ]
 
 gennieWinner :: String
@@ -266,4 +263,4 @@ takeCoins = "Digite a quantidade de moedas que deseja retirar da pilha informada
 
 -- Command Clear
 clearT :: IO ()
-clearT = callCommand clear
+clearT = callCommand "clear"
