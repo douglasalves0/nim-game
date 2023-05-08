@@ -5,18 +5,6 @@ import Player.GetPlayerInput
 import Control.Concurrent (threadDelay)
 import GeniusDraw.DrawingFunctions (drawStartGenie)
 
-gameLoop :: [Int] -> Bool -> Int -> IO ()
--- stack isBot level
-gameLoop stack true level = gameVersusBot stack level
-gameLoop stack false level = gameVersusPlayer stack
-
-newStack :: [Int] -> (Int, Int) -> [Int]
-newStack (x : xs) (coins, 0) = (x - coins) : xs
-newStack (x : xs) (coins, move) = x : newStack xs (coins, move - 1)
-
-winned :: [Int] -> Bool
-winned [] = True
-winned (x : xs) = if x /= 0 then False else winned xs
 
 gameVersusPlayer :: [Int] -> IO()
 gameVersusPlayer stack = do
@@ -27,30 +15,6 @@ gameVersusPlayer stack = do
         let stack3 = newStack stack2 input2
         if winned stack3 then drawStartGenie "Player 2 Ganhou!" else gameVersusPlayer stack3
 
--- gameVersusBotSelected:: (([Int])->(Int,Int)) -> [Int] -> Int -> IO ()
--- gameVersusBotSelected bot stack level = do
---     input <- getPlayerInput stack "Player 1"
---     gamePlayerRound input bot (newStack stack input) level
-
--- gamePlayerRound:: (Int, Int) -> (([Int])->(Int,Int)) -> [Int] -> Int -> IO ()
--- gamePlayerRound input bot stack level =
---     if winned stack
---     then drawStartGenie "Player 1 Ganhou!"
---     else
---         makeMove (bot stack) input bot stack level
-
--- makeMove :: (Int, Int) -> (Int, Int) -> (([Int])->(Int,Int)) -> [Int] -> Int -> IO ()
--- makeMove botMove input bot stack level = do
---     drawStartGenie ("Hmmm! Vou tirar " ++ show (fst botMove) ++ " moedas da pilha " ++ show (snd botMove))
---     threadDelay 2000000
---     continuationVerification (newStack stack botMove) level
-
--- continuationVerification:: [Int] -> Int -> IO()
--- continuationVerification stack level = if winned stack then drawStartGenie "Bot Ganhou!" else gameVersusBot stack level
-
--- gameVersusBot:: [Int] -> Int -> IO()
--- gameVersusBot stack level = gameVersusBotSelected (getEngine level) stack level
-
 gameVersusBot :: [Int] -> Int -> IO ()
 gameVersusBot stack level = do
     let bot = getEngine level
@@ -58,8 +22,22 @@ gameVersusBot stack level = do
     let stack2 = newStack stack input 
     if winned stack2 then drawStartGenie "Player 1 Ganhou!" else do
         let botMove = bot stack2
-        drawStartGenie ("Hmmm! Vou tirar " ++ show (fst botMove+1) ++ " moedas da pilha " ++ show (snd botMove))
+        drawStartGenie ("Hmmm! Vou tirar " ++ show (fst botMove) ++ " moedas da pilha " ++ show (snd botMove + 1))
         threadDelay 2000000 
         
         let stack3 = newStack stack2 botMove
         if winned stack3 then drawStartGenie "Bot Ganhou!" else gameVersusBot stack3 level
+
+
+gameLoop :: [Int] -> Bool -> Int -> IO ()
+-- stack isBot level
+gameLoop stack True level = gameVersusBot stack level
+gameLoop stack False level = gameVersusPlayer stack
+
+newStack :: [Int] -> (Int, Int) -> [Int]
+newStack (x : xs) (coins, 0) = (x - coins) : xs
+newStack (x : xs) (coins, move) = x : newStack xs (coins, move - 1)
+
+winned :: [Int] -> Bool
+winned [] = True
+winned (x : xs) = if x /= 0 then False else winned xs

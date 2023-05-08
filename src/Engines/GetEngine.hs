@@ -8,3 +8,4 @@ getEngine :: Int -> (([Int])->(Int,Int))
 getEngine 1 = easyEngine
 getEngine 2 = mediumEngine
 getEngine 3 = hardEngine
+getEngine x = easyEngine
