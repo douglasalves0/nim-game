@@ -5,31 +5,6 @@ import Validate.ValidateMenuInput
 import Game.GameLoop
 import System.Random
 
-createDifficulty :: String -> IO()
-createDifficulty frase = do
-    drawMenuGenie frase "DESAFIOS" ["1 | Conquistar 10 moedas" , "2 | Conquistar 15 moedas" , "3 | Conquistar 20 moedas"]
-    option2 <- getLine
-    if validateRange 3 option2 then do
-        list <- createStack (read option2 :: Int)
-        gameLoop list True (read option2 :: Int)
-    else 
-        createDifficulty "Digite uma opção válida!"
-
-createStack :: Int -> IO [Int]
-createStack difficulty 
-    | difficulty == 1 = getStacks 10 3
-    | difficulty == 2 = getStacks 15 4
-    | difficulty == 3 = getStacks 20 5
-    | difficulty == 4 = getStacks 25 5
-
-getStacks :: Int -> Int -> IO [Int]
-getStacks coins stacks  
-    | stacks == 1 = return [coins]
-    | otherwise = do
-        choice <- randomRIO (2, coins `div` stacks)
-        restOfList <- getStacks  (coins - choice) (stacks - 1)
-        return (choice : restOfList)
-
 tiposDesafio :: [String]
 tiposDesafio = [
     "Desafio Fácil:",
@@ -50,6 +25,33 @@ tiposDesafio = [
     "se você quiser eu deixo você e outra pessoa",
     "apostarem 25 moedas, divididas em 5 pilhas"
     ]
+    
+
+createDifficulty :: String -> IO()
+createDifficulty frase = do
+    drawMenuGenie frase "DESAFIOS" ["1 | Conquistar 10 moedas" , "2 | Conquistar 15 moedas" , "3 | Conquistar 20 moedas"]
+    option2 <- getLine
+    if validateRange 3 option2 then do
+        list <- createStack (read option2 :: Int)
+        gameLoop list True (read option2 :: Int)
+
+    else 
+        createDifficulty "Digite uma opção válida!"
+
+createStack :: Int -> IO [Int]
+createStack difficulty 
+    | difficulty == 1 = getStacks 10 3
+    | difficulty == 2 = getStacks 15 4
+    | difficulty == 3 = getStacks 20 5
+    | difficulty == 4 = getStacks 25 5
+
+getStacks :: Int -> Int -> IO [Int]
+getStacks coins stacks  
+    | stacks == 1 = return [coins]
+    | otherwise = do
+        choice <- randomRIO (2, coins `div` stacks)
+        restOfList <- getStacks  (coins - choice) (stacks - 1)
+        return (choice : restOfList)
 
 getMenu :: Int -> IO()
 getMenu option
@@ -62,16 +64,18 @@ getMenu option
                             gameLoop list False 0
                         else 
                             createDifficulty "Te apresento os meus desafios, se conseguir me vencer você poderá levar as criptomoedas respectivas de cada etapa. Lembre-se quanto maior o valor, maior a dificuldade!"
+
                     else 
                         getMenu 1
     -- create lines 
     | option == 2 = do 
-                    drawHintGenie "Abaixo de apresento os meus desafios e a forma de chamar alguém para dividir essa oportunidade de ganhar as criptomoedas!" tiposDesafio
+
+                    drawHintGenie "Abaixo te apresento os meus desafios e a forma de chamar alguém para dividir essa oportunidade de ganhar as criptomoedas! depois que ler tudo aperte enter para continuar" tiposDesafio
                     x <- getLine
                     mainMenu "Agora que já conhece os meus desafios, escolha uma das opções abaixo."
     -- create lines 
     | option == 3 = do 
-                    drawHintGenie "Posso te confessar que isso será muito díficil, porém irei te ensinar como executar o desafio!" ["Primeira Linha", "Segunda Linha"]
+                    drawHintGenie "Posso te confessar que isso será muito díficil, porém irei te ensinar como executar o desafio! depois que ler tudo aperte enter para continuar" ["Primeira Linha", "Segunda Linha"]
                     x <- getLine
                     mainMenu "Agora que já tem uma ideia de como executar o meu desafio, escolha uma das opções abaixo."
 
@@ -87,6 +91,7 @@ startGame openingSentence = do
         else 
             drawStartGenie "Quem desiste sem ao menos tentar uma vez não merece as minhas criptomoedas!"
     else startGame "Digite uma opção Válida!"
+
 
 mainMenu :: String -> IO()
 mainMenu fraseInicial = do
