@@ -73,7 +73,8 @@ boxDivider n = "|"++['-' | x <- [1..n]]++"|"
 createItem:: Int -> String -> [String]
 createItem size str = [boxDivider size] ++
                         [blankMenuBox size] ++
-                        [fitToMiddle (blankMenuBox size) str] ++
+                        --[fitToMiddle (blankMenuBox size) str] ++
+                        [fillSpacesLast size str] ++
                         [blankMenuBox size]
 
 createMenu:: Int -> [String] -> [String]
