@@ -1,6 +1,6 @@
 # Jogo do nim
 Nim é um gênio que perdeu todos os seus desejos para o mercado financeiro, agora ele só tem moedas.
-Porém, ele está disposto a da-las para você caso você seja bom o suficiente para vencê-lo no jogo dele
+Porém, ele está disposto a da-las para você caso você seja bom o suficiente para vencê-lo no jogo dele.
 ``` 
                                                                                             /}
                                                                                          ./`|´\
@@ -34,11 +34,11 @@ Ao longo do período esse jogo será desenvolvido por 5 pessoas em duas linguage
 - prolog (paradigma logico)
 ---
 
-## jogando em **Haskell**
-para conseguir executar o código em haskell é necessário baixar a biblioteca Random
+## Jogando em **Haskell**
+Para conseguir executar o código em haskell é necessário baixar a biblioteca Random
 > cabal install --lib random
 
-após isso é possível jogá-lo sem nem precisar compilar usando esse código dentro da pasta src:
+Após isso é possível jogá-lo sem nem precisar compilar usando esse código dentro da pasta src:
 > runghc StartGame.hs
 
 ---
