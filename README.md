@@ -1,3 +1,6 @@
+# Sumário
+1. [História do jogo](#Jogo do nim)
+
 # Jogo do nim
 Nim é um gênio que perdeu todos os seus desejos para o mercado financeiro, agora ele só tem moedas.
 Porém, ele está disposto a da-las para você caso você seja bom o suficiente para vencê-lo no jogo dele.
@@ -33,6 +36,15 @@ Ao longo do período esse jogo será desenvolvido por 5 pessoas em duas linguage
 - haskell (paradigma funcional)
 - prolog (paradigma logico)
 ---
+
+## Arquitetura
+A arquitetura e conexão entre os módulos da aplicação usada para basear a implementação está representada nesse fluxograma, definindo o que cada função/módulo faz e suas devidas entradas e saídas.
+### Legenda dos nós:
+- Azuis = Funções de utilidades;
+- Laranja = Funções de lógica do jogo;
+- Vermelho = Funções de validação de entrada;
+- Roxo = Funções das engines de bot;
+- Verde = Fluxograma do jogo.
 
 ## Jogando em **Haskell**
 Para conseguir executar o código em haskell é necessário baixar a biblioteca Random
