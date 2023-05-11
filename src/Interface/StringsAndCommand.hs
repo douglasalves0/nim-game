@@ -1,6 +1,7 @@
 module Interface.StringsAndCommand where
 
 import System.Process (callCommand)
+import System.Info (os)
 
 -- Main Menu Strings
 challengeTypes :: [String]
@@ -263,4 +264,5 @@ takeCoins = "Digite a quantidade de moedas que deseja retirar da pilha informada
 
 -- Command Clear
 clearT :: IO ()
-clearT = callCommand "clear"
+clearT = do
+  callCommand (if os == "mingw32" then "cls" else "clear")
