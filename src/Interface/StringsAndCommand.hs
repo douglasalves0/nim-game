@@ -281,7 +281,7 @@ presentsValidEntryStack = "Escolha uma pilha válida para retirar as moedas."
 presentsValidEntryCoins :: String
 presentsValidEntryCoins = "Você só pode retirar entre 1 ou 3 moedas por pilha por vez."
 
-presentsValidEntryStackCoins = String 
+presentsValidEntryStackCoins :: String 
 presentsValidEntryStackCoins = "Você não pode retirar um valor maior de uma pilha menor."
 
 
