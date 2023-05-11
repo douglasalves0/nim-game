@@ -97,3 +97,4 @@ getStacks coins stacks
       choice <- randomRIO (2, coins `div` stacks)
       restOfList <- getStacks (coins - choice) (stacks - 1)
       return (choice : restOfList)
+      

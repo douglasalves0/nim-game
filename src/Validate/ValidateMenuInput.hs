@@ -11,3 +11,4 @@ validateName :: String -> Bool
 validateName name
   | name == "" = False
   | otherwise = True
+  
