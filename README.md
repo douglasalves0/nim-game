@@ -1,6 +1,3 @@
-# Sumário
-1. [História do jogo](#Jogo do nim)
-
 # Jogo do nim
 Nim é um gênio que perdeu todos os seus desejos para o mercado financeiro, agora ele só tem moedas.
 Porém, ele está disposto a da-las para você caso você seja bom o suficiente para vencê-lo no jogo dele.
