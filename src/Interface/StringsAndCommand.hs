@@ -185,6 +185,7 @@ initialPresentation =
       "criptomoedas que estiverem disponíveis. Digite uma das opções abaixo."
     ]
 
+
 -- Game Loop Strings
 player1Turn :: String
 player1Turn =
@@ -255,12 +256,34 @@ wallet20 =
     "      ¢        ¢       ¢        ¢       ¢       "
   ]
 
+
 -- GetPlayerInput Strings
 takeStack :: String
 takeStack = "Digite a pilha que deseja retirar moedas: "
 
 takeCoins :: String
 takeCoins = "Digite a quantidade de moedas que deseja retirar da pilha informada: "
+
+
+-- ValidatePlayerInput 
+presentsValidEntryNumber :: String
+presentsValidEntryNumber = "Digite um número positivo válido!"
+
+presentsValidEntryPositive :: String 
+presentsValidEntryPositive = "O valor de moedas deve ser um número positivo."
+
+presentsValidEntryNumberStack :: String 
+presentsValidEntryNumberStack = "O valor da pilha dever ser um número positivo."
+
+presentsValidEntryStack :: String 
+presentsValidEntryStack = "Escolha uma pilha válida para retirar as moedas."
+
+presentsValidEntryCoins :: String
+presentsValidEntryCoins = "Você só pode retirar entre 1 ou 3 moedas por pilha por vez."
+
+presentsValidEntryStackCoins = String 
+presentsValidEntryStackCoins = "Você não pode retirar um valor maior de uma pilha menor."
+
 
 -- Command Clear
 clearT :: IO ()

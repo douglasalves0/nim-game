@@ -1,4 +1,5 @@
 module Engines.HardEngine (hardEngine) where 
+
 import Data.Bits
 import Engines.RandomEngine
 
@@ -11,7 +12,6 @@ hardEngine list = do
 getXorMod4 :: [Int] -> Int
 getXorMod4 [] = 0
 getXorMod4 (x:xs) = xor (rem x 4) (getXorMod4 xs)
-
 
 makeBestMove :: Int -> [Int] -> Int -> (Int,Int)
 makeBestMove xOr (x:xs) i =

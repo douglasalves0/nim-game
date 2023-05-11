@@ -1,4 +1,5 @@
 module Engines.MediumEngine (mediumEngine) where
+
 import Engines.RandomEngine
 
 makeMove :: Int -> [Int] -> (Int, Int)
