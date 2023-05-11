@@ -36,6 +36,10 @@ Ao longo do período esse jogo será desenvolvido por 5 pessoas em duas linguage
 
 ## Arquitetura
 A arquitetura e conexão entre os módulos da aplicação usada para basear a implementação está representada nesse fluxograma, definindo o que cada função/módulo faz e suas devidas entradas e saídas.
+
+![image](https://github.com/douglasalves0/nim-game-haskell/assets/81260717/1cd1f502-7d16-4e0c-bbb5-9e9feaee6975)
+
+Link para o mapa: https://excalidraw.com/#json=cwhNg7nB5eGvZCaGwaVOZ,P9ILKHqmtWaUl6-FTzPr0g
 ### Legenda
 #### Nós:
 - **Azul** = Funções de utilidades (Funções que printam na tela, retornam as pilhas feitas, retornam as dificuldades, não necessariamente possuem a lógica do jogo por trás);
