@@ -37,7 +37,7 @@ Ao longo do período esse jogo será desenvolvido por 5 pessoas em duas linguage
 ## Arquitetura
 A arquitetura e conexão entre os módulos da aplicação usada para basear a implementação está representada nesse fluxograma, definindo o que cada função/módulo faz e suas devidas entradas e saídas.
 ### Legenda dos nós:
-- Azuis = Funções de utilidades;
+- Azul = Funções de utilidades;
 - Laranja = Funções de lógica do jogo;
 - Vermelho = Funções de validação de entrada;
 - Roxo = Funções das engines de bot;
