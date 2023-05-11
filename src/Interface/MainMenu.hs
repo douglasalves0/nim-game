@@ -58,7 +58,9 @@ getMenu option
       drawHintGenie presentsChallengesPerforms performsChallenge
       x <- getLine
       mainMenu presentsMainPerforms
-  | option == 4 = drawStartGenie presentsWithdrawal
+  | option == 4 = do
+    clearT
+    drawStartGenie presentsWithdrawal
 
 getNamePlayer :: String -> IO String
 getNamePlayer phrase = do
