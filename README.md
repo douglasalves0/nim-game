@@ -38,15 +38,15 @@ Ao longo do período esse jogo será desenvolvido por 5 pessoas em duas linguage
 A arquitetura e conexão entre os módulos da aplicação usada para basear a implementação está representada nesse fluxograma, definindo o que cada função/módulo faz e suas devidas entradas e saídas.
 ### Legenda
 #### Nós:
-- Azul = Funções de utilidades (Funções que printam na tela, retornam as pilhas feitas, retornam as dificuldades, não necessariamente possuem a lógica do jogo por trás);
-- Amarelo = Funções de lógica do jogo (Funções que possuem a lógica do jogo por trás, onde o jogo acontece);
-- Vermelho = Funções de validação de entrada (Funções que validam as entradas dos jogadores);
-- Roxo = Funções das engines de bot (Funções que representam o bot e seus cálculos);
-- Verde = Fluxograma do jogo (Caminhos que podem ser tomados).
+- **Azul** = Funções de utilidades (Funções que printam na tela, retornam as pilhas feitas, retornam as dificuldades, não necessariamente possuem a lógica do jogo por trás);
+- **Amarelo** = Funções de lógica do jogo (Funções que possuem a lógica do jogo por trás, onde o jogo acontece);
+- **Vermelho** = Funções de validação de entrada (Funções que validam as entradas dos jogadores);
+- **Roxo** = Funções das engines de bot (Funções que representam o bot e seus cálculos);
+- **Verde** = Fluxograma do jogo (Caminhos que podem ser tomados).
 #### Textos:
-- Preto = Textos de explicação da função (O que ela faz e como ela faz);
-- Laranja = Textos de explicação da entrada da função (Variáveis, nomes e seus tipos);
-- Verde = Textos de explicação da saída (Qual o tipo da saída e o que aquela saída representará no jogo).
+- **Preto** = Textos de explicação da função (O que ela faz e como ela faz);
+- **Laranja** = Textos de explicação da entrada da função (Variáveis, nomes e seus tipos);
+- **Verde** = Textos de explicação da saída (Qual o tipo da saída e o que aquela saída representará no jogo).
 
 ## Jogando em **Haskell**
 Para conseguir executar o código em haskell é necessário baixar a biblioteca Random
