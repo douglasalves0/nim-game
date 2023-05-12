@@ -267,22 +267,40 @@ takeCoins = "Digite a quantidade de moedas que deseja retirar da pilha informada
 
 -- ValidatePlayerInput 
 presentsValidEntryNumber :: String
-presentsValidEntryNumber = "Digite um número positivo válido!"
+presentsValidEntryNumber = 
+  unwords
+  ["Digite um número positivo válido!                                                                                                ",
+  "[APERTE ENTER PARA CONTINUAR E INFORMAR SUA JOGADA.]"]
 
 presentsValidEntryPositive :: String 
-presentsValidEntryPositive = "O valor de moedas deve ser um número positivo."
+presentsValidEntryPositive = 
+  unwords
+  ["O valor de moedas deve ser um número positivo.                                                                                  ",
+  "[APERTE ENTER PARA CONTINUAR E INFORMAR SUA JOGADA.]"]
 
 presentsValidEntryNumberStack :: String 
-presentsValidEntryNumberStack = "O valor da pilha dever ser um número positivo."
-
+presentsValidEntryNumberStack = 
+  unwords
+  ["O valor da pilha dever ser um número positivo.                                                                                  ",
+  "[APERTE ENTER PARA CONTINUAR E INFORMAR SUA JOGADA.]"]
+  
 presentsValidEntryStack :: String 
-presentsValidEntryStack = "Escolha uma pilha válida para retirar as moedas."
-
+presentsValidEntryStack = 
+  unwords
+  ["Escolha uma pilha válida para retirar as moedas.                                                                                ",
+  "[APERTE ENTER PARA CONTINUAR E INFORMAR SUA JOGADA.]"]
+  
 presentsValidEntryCoins :: String
-presentsValidEntryCoins = "Você só pode retirar entre 1 ou 3 moedas por pilha por vez."
+presentsValidEntryCoins = 
+  unwords
+  ["Você só pode retirar entre 1 ou 3 moedas por pilha por vez.                                                                     ",
+  "[APERTE ENTER PARA CONTINUAR E INFORMAR SUA JOGADA.]"]
 
 presentsValidEntryStackCoins :: String 
-presentsValidEntryStackCoins = "Você não pode retirar um valor maior de uma pilha menor."
+presentsValidEntryStackCoins = 
+  unwords
+  ["Você não pode retirar um valor maior de uma pilha menor.                                                                        ",
+  "[APERTE ENTER PARA CONTINUAR E INFORMAR SUA JOGADA.]"]
 
 
 -- Command Clear
