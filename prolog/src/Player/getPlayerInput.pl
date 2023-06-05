@@ -1,8 +1,5 @@
 validatePlayerInputCoins(PlayerInputCoins):-
-    % Corrigir um erro quando o erro acontece em apenas um dos lados ou
-    % em ambos os lados que o Error nao isntanciado, mas se a gente colocar Error = false
-    % o programa simplesmente para
-    (PlayerInputCoins < 1 ; PlayerInputCoins > 3 ; integer(PlayerInputCoins) = false) ->
+    (is_of_type(text, PlayerInputCoins) ; is_of_type(char, PlayerInputCoins) ; PlayerInputCoins < 1 ; PlayerInputCoins > 3) ->
     (
         write("Digite um numero inteiro entre 1 e 3\n"),
         getPlayerInputCoins()
@@ -10,7 +7,7 @@ validatePlayerInputCoins(PlayerInputCoins):-
     write(PlayerInputCoins).
 
 validatePlayerInputStacks(PlayerInputStacks):- 
-    (PlayerInputStacks < 0 ; integer(PlayerInputStacks) = true) ->
+    (is_of_type(negative_integer, PlayerInputStacks) ; is_of_type(char, PlayerInputStacks) ; is_of_type(text, PlayerInputStacks)) ->
     (
         write("Digite um numero inteiro maior que 0\n"),
         getPlayerInputStacks()
@@ -20,6 +17,7 @@ validatePlayerInputStacks(PlayerInputStacks):-
 getPlayerInputCoins():-
     write("Quantas moedas voce quer retirar?\n"),
     read(PlayerInputCoins),
+    nl,
     validatePlayerInputCoins(PlayerInputCoins),
     
     getPlayerInputStacks(),
@@ -28,6 +26,7 @@ getPlayerInputCoins():-
 getPlayerInputStacks():-
     write("De qual pilha voce quer retirar as moedas?\n"),
     read(PlayerInputStacks),
+    nl,
     validatePlayerInputStacks(PlayerInputStacks),
   
     halt.% Aqui chama a funcao de deletar da pilha
