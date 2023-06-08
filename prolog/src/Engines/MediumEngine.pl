@@ -1,7 +1,7 @@
 :- include('RandomEngine.pl').
 
-haveMove([], false).
-haveMove([X|_], true) :- (X mod 4) =:= 0.
+haveMove([], false) :- !.
+haveMove([X|_], true) :- (X mod 4) =\= 0, !.
 haveMove([_|Y], R) :- haveMove(Y, R).
 
 makeMove(Idx,[X|_], [V, Idx]) :-

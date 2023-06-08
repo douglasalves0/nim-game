@@ -6,5 +6,5 @@ getPlayerInput(StackList):-
     write("Quantas moedas voce quer retirar?\n"),
     read(PlayerInputCoins),
     
-    isValidPlay(InputCoins, InputStack, StackList)
+    isValidPlay(InputCoins, InputStack, StackList),
     deleteFromStack(InputCoins, InputStack).
