@@ -24,12 +24,6 @@ getPlayerInputStacks(InputStack):-
         InputStack is PlayerInputStacks    
     ).
 
-deleteFromStack(InputCoins, InputStack):-
-    write(InputCoins),
-    nl,
-    write(InputStack),
-    nl,
-    halt.
 
 getPlayerInput():-
     getPlayerInputCoins(InputCoins),
