@@ -61,7 +61,7 @@ gameLoop(Stacks, 0, NamePlayer1, NamePlayer2) :- gameVersusPlayer(Stacks, NamePl
 
 newStack([H | T], CoinsQuantity, 0, [NewH|T]):- NewH is H - CoinsQuantity, !.
 
-newStack([H | T],CoinsQuantity, Index, [H | Result]):-
+newStack([H | T], CoinsQuantity, Index, [H | Result]):-
   Index2 is Index - 1,
   newStack(T, CoinsQuantity, Index2, Result).
 
