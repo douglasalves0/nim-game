@@ -9,7 +9,7 @@ getPlayerInput(StackList, Msg, PlayerMove):-
     drawGameLoop(StackList, "De qual pilha voce quer retirar as moedas?"),  
     read(InputStack),
 
-    write(StackList, "Quantas moedas voce quer retirar?"),
+    drawGameLoop(StackList, "Quantas moedas voce quer retirar?"),
     read(InputCoins),
     
     isValidPlay(InputCoins, InputStack, StackList),
