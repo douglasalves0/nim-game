@@ -3,21 +3,22 @@
 :- include('../Validate/isValidPlay.pl').
 :- include('../GeniusDraw/DrawingFunctions.pl'). 
 
-getPlayerInput(StackList, Msg, PlayerMove):-
+getPlayerInput(StackList, Msg, PlayerMove) :-
     drawGameLoop(StackList, Msg),
-    read(_),
-    
+    read(_), % Descarta a entrada desnecessária
+
     drawGameLoop(StackList, "De qual pilha voce quer retirar as moedas?"),  
     read(InputStack),
 
     drawGameLoop(StackList, "Quantas moedas voce quer retirar?"),
     read(InputCoins),
     
-    InputStack2 is InputStack - 1,
-    isValidPlay(InputCoins, InputStack2, StackList, Msg),
+    isValidPlay(InputCoins, InputStack, StackList, ErrorMsg),
+    write(ErrorMsg),
     (
-        Msg =:= "" ->
+        (ErrorMsg = "") ->
+            InputStack2 is InputStack - 1,
             PlayerMove = [InputCoins, InputStack2]
         ; 
-            getPlayerInput(StackList, Msg, PlayerMove)
+            getPlayerInput(StackList, ErrorMsg, PlayerMove)
     ).

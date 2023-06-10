@@ -1,13 +1,19 @@
-:- include('../Interface/StringsAndCommands').
+:- include('../Interface/StringsAndCommand.pl').
 
-isValidPlay(CoinsQuantity, IndexStack, StackList, Msg):-
-  number(IndexStack) -> Msg is presentsValidEntryNumber,
-  number(CoinsQuantity) Msg is presentsValidEntryPositive,
-  CoinsQuantity > 3 -> Msg is presentsValidEntryCoins,
-  CoinsQuantity < 1 -> Msg is presentsValidEntryCoins,
-
-  nth0(IndexStack, StackList, V),
-  V <= CoinsQuantity -> Msg is presentsValidEntryStackCoins,
-
-  nonvar(Msg) -> Msg is "" ; true.
   
+isValidPlay(_, IndexStack, _, Msg) :- (number(IndexStack) -> true; presentsValidEntryNumber(Msg), !).
+
+isValidPlay(_, IndexStack, StackList, Msg) :- 
+  length(StackList, L),
+  ((IndexStack >= 1 , IndexStack =< L) -> true ; presentsValidEntryStack(Msg), !).
+
+isValidPlay(CoinsQuantity, _, _, Msg) :- (number(CoinsQuantity) -> true; presentsValidEntryPositive(Msg), !).
+
+isValidPlay(CoinsQuantity, _, _, Msg) :- ((CoinsQuantity > 0 , CoinsQuantity < 4) -> true; presentsValidEntryCoins(Msg), !).
+
+isValidPlay(CoinsQuantity, IndexStack, StackList, Msg) :-
+  Index2 is IndexStack - 1,
+  nth0(Index2, StackList, V),
+  (V >= CoinsQuantity -> true; presentsValidEntryStackCoins(Msg), !).
+
+isValidPlay(_,_,_,"").

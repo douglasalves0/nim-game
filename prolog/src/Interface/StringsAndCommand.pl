@@ -126,7 +126,7 @@ presentsMainMenu(String) :-
     String = "Bem vindo(a) ao desafio das criptomoedas, digite uma das opções abaixo!".
 
 presentsInitialWithdrawal(String) :-
-    String =  "Quem desiste sem ao menos tentar uma vez não merece as minhas criptomoedas!"
+    String =  "Quem desiste sem ao menos tentar uma vez não merece as minhas criptomoedas!".
 
 mainMenuTitle(Title) :-
     Title = "DESAFIO DAS CRIPTOMOEDAS".
@@ -246,7 +246,7 @@ takeStack(String) :-
     String =  "Digite a pilha que deseja retirar moedas: ".
 
 takeCoins(String) :-
-    String =   "Digite a quantidade de moedas que deseja retirar da pilha informada: "
+    String =   "Digite a quantidade de moedas que deseja retirar da pilha informada: ".
 
 presentsValidEntryNumber(String) :-
     String =  "Digite um número positivo válido!".
