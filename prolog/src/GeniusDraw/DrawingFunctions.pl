@@ -168,7 +168,7 @@ genieMenuLine(X,MenuWidth,LineWidth,GenieSize) :-
     atom_chars(X,MenuList),
     length(MenuList,MenuLength),
     makeSpace(MenuWidth-MenuLength),write('|'),
-    Nwidth is LineWidth - 4 - MenuWidth - MenuLength,
+    Nwidth is LineWidth - 6 - MenuWidth,
     SGenieSize is GenieSize + 1,
     makeGenie(Nwidth,SGenieSize),
 
@@ -263,3 +263,4 @@ drawGameLoop(Stack,Text) :-
     startTopSpeechBubble(SpeechBubbleSize),
     startLine(SpeechBubbleSize,LText),
     coinDrawLoop(Stack,LineWidth,GenieSize).
+
