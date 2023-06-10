@@ -25,15 +25,18 @@ makeSpace(N):-
     write(" "),
     makeSpace(N2).
 
+makeLine(0):- write("").
+makeLine(N):-
+    N2 is N - 1,
+    write("-"),
+    makeLine(N2).
+
 fillGenie(_,0):- write("").
 
 fillGenie(N,GenieSize):-
     NextGenie is GenieSize - 1,
     fillGenie(N,NextGenie),
-    getGennie(GenieSize,Genie),
-    atom_chars(Genie,GenieList),
-    length(GenieList,Length),
-    makeSpace(N-Length),write(Genie),nl.
+    makeGenie(N,GenieSize).
 
 %desenhar o genio com suas pilhas
 drawStack() :-
@@ -129,6 +132,101 @@ writeLine(Max,Size,[X|T]) :-
         makeSpace(Size),write('|'),nl,write('|'),writeLine(Max,Max,[X|T])
         ).
 
+% desenhar o menu com o genio
+genieMenu(MenuName,Menu,MenuWidth,LineWidth) :-
+    atom_chars(MenuName,MenuNameList),
+    length(MenuNameList,MenuNameLength),
+    HMenuW is div(MenuWidth,2),
+    NlineW is LineWidth - 4 - HMenuW - MenuNameLength,
+    makeSpace(4+HMenuW),write(MenuName),makeGenie(NlineW,1),
+    makeGenie(LineWidth,2),
+    makeSpace(4),write('|'),makeLine(MenuWidth),write('|'),
+    Nline2 is LineWidth - 6 - MenuWidth,makeGenie(Nline2,3),
+    genieMenuLoop(Menu,MenuWidth,LineWidth,4).
+
+genieMenuLoop([],_,_,20):- write(""),!.
+
+genieMenuLoop([],MenuWidth,LineWidth,GenieSize) :-
+    makeGenie(LineWidth,GenieSize),
+    NextGenie is GenieSize + 1,
+    genieMenuLoop([],MenuWidth,LineWidth,NextGenie).
+
+genieMenuLoop([X],MenuWidth,LineWidth,GenieSize) :-
+    genieMenuLine(X,MenuWidth,LineWidth,GenieSize),
+    NextGenie is GenieSize + 4,
+    genieMenuLoop([],MenuWidth,LineWidth,NextGenie).
+
+genieMenuLoop([X|T],MenuWidth,LineWidth,GenieSize) :-
+    genieMenuLine(X,MenuWidth,LineWidth,GenieSize),
+    NextGenie is GenieSize + 4,
+    genieMenuLoop(T,MenuWidth,LineWidth,NextGenie).
+
+genieMenuLine(X,MenuWidth,LineWidth,GenieSize) :-
+    makeMenuLine(MenuWidth,LineWidth,GenieSize),
+
+    makeSpace(4),write('|'),write(X),
+    atom_chars(X,MenuList),
+    length(MenuList,MenuLength),
+    makeSpace(MenuWidth-MenuLength),write('|'),
+    Nwidth is LineWidth - 4 - MenuWidth - MenuLength,
+    SGenieSize is GenieSize + 1,
+    makeGenie(Nwidth,SGenieSize),
+
+    TGenieSize is GenieSize + 2,
+    makeMenuLine(MenuWidth,LineWidth,TGenieSize),
+
+    makeSpace(4),write('|'),makeLine(MenuWidth),write('|'),
+    Nwidth2 is LineWidth - 6 - MenuWidth,
+    BottomGenie is GenieSize + 3,
+    makeGenie(Nwidth2,BottomGenie).
+
+makeMenuLine(MenuWidth,LineWidth,GenieSize) :-
+    makeSpace(4),write('|'),makeSpace(MenuWidth),write('|'),
+    Nwidth is LineWidth - 6 - MenuWidth,
+    makeGenie(Nwidth,GenieSize).
+
+makeGenie(LineWidth,GenieSize) :-
+    getGennie(GenieSize,Genie),
+    atom_chars(Genie,GenieList),
+    length(GenieList,Length),
+    makeSpace(LineWidth-Length),write(Genie),nl.
+
+% funcoes para desenhar as dicas
+genieHint(Hint,MenuWidth,LineWidth) :-
+    makeSpace(4),write('|'),makeLine(MenuWidth),write('|'),
+    Nwidth is LineWidth - 6 - MenuWidth,
+    makeGenie(Nwidth,1),
+    genieHintLoop(Hint,MenuWidth,LineWidth,2).
+
+genieHintLoop([],_,_,20):- write(""),!.
+
+genieHintLoop([],_,LineWidth,GenieSize) :-
+    makeGenie(LineWidth,GenieSize),
+    NextGenie is GenieSize + 1,
+    genieHintLoop([],_,LineWidth,NextGenie).
+
+genieHintLoop([Hint],MenuWidth,LineWidth,GenieSize) :-
+    genieHintLine(Hint,MenuWidth,LineWidth,GenieSize),
+    makeSpace(4),write('|'),makeLine(MenuWidth),write('|'),
+    Nwidth is LineWidth - 6 - MenuWidth,
+    BottomGenie is GenieSize + 1,
+    makeGenie(Nwidth,BottomGenie),
+    NextGenie is GenieSize + 2,
+    genieHintLoop([],MenuWidth,LineWidth,NextGenie).
+
+genieHintLoop([Hint|T],MenuWidth,LineWidth,GenieSize) :-
+    genieHintLine(Hint,MenuWidth,LineWidth,GenieSize),
+    NextGenie is GenieSize + 1,
+    genieHintLoop(T,MenuWidth,LineWidth,NextGenie).
+
+genieHintLine(Hint,MenuWidth,LineWidth,GenieSize) :-
+    makeSpace(4),write('|'),write(Hint),
+    atom_chars(Hint,MenuList),
+    length(MenuList,MenuLength),
+    makeSpace(MenuWidth-MenuLength),write('|'),
+    Nwidth is LineWidth - 4 - MenuWidth - MenuLength,
+    makeGenie(Nwidth,GenieSize).
+
 % funcoes para desenhar o genio
 drawStartGenie(Text) :- 
     SpeechBubbleSize = 96,
@@ -139,9 +237,23 @@ drawStartGenie(Text) :-
     startLine(SpeechBubbleSize,LText),
     fillGenie(LineWidth,GenieSize).
 
-% drawMenuGenie()
+drawMenuGenie(Text,MenuName,Menu) :-
+    SpeechBubbleSize = 96,
+    LineWidth = 110,
+    MenuWidth = 50,
+    split_string(Text, ' ', '', LText),
+    startTopSpeechBubble(SpeechBubbleSize),
+    startLine(SpeechBubbleSize,LText),
+    genieMenu(MenuName,Menu,MenuWidth,LineWidth).
 
-% drawHintGenie()
+drawHintGenie(Text,Hint) :-
+    SpeechBubbleSize = 96,
+    LineWidth = 110,
+    MenuWidth = 50,
+    split_string(Text, ' ', '', LText),
+    startTopSpeechBubble(SpeechBubbleSize),
+    startLine(SpeechBubbleSize,LText),
+    genieHint(Hint,MenuWidth,LineWidth).
 
 drawGameLoop(Stack,Text) :-
     SpeechBubbleSize = 96,
@@ -151,4 +263,3 @@ drawGameLoop(Stack,Text) :-
     startTopSpeechBubble(SpeechBubbleSize),
     startLine(SpeechBubbleSize,LText),
     coinDrawLoop(Stack,LineWidth,GenieSize).
-

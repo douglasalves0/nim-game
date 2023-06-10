@@ -8,27 +8,22 @@ makePlayerMove(Stacks, NamePlayer, Stacks2) :-
     concat_atom(["Sua vez ", NamePlayer], Msg),
     getPlayerInput(Stacks, Msg, [Coins|Stack]),
     newStack(Stacks, Coins, Stack, Stacks2),
-    winned(Stacks2, R),
-    (R =:= true -> 
+    (winned(Stacks2) -> 
     concat_atom(["Parabéns ", NamePlayer, "Você venceu!"], WinnerMessage),
-    write(WinnerMessage),
-    nl,
-    halt).
+    drawStartGenie(WinnerMessage),
+    halt; !).
 
 makeBotMove(Stacks, Level, Stacks2) :-
-    useEngine(Level, Stacks, [Coins|Stack]),
-    number_codes(Stack, StackStr),
-    number_codes(Coins, CoinsStr),
+    useEngine(Level, Stacks, [Coins|StackL]),
+    nth0(0, StackL, Stack),
+    number_string(Stack, StackStr),
+    number_string(Coins, CoinsStr),
     concat_atom(["Hmmm! Vou tirar ", CoinsStr, " moedas da pilha ", StackStr], BotMoveMsg),
-    write(BotMoveMsg),
-    nl,
+    drawStartGenie(BotMoveMsg),
     newStack(Stacks, Coins, Stack, Stacks2),
-    winned(Stacks2, R),
-    (R =:= true -> 
-    concat_atom(["Parabéns ", NamePlayer, "Você venceu!"], WinnerMessage),
-    write(WinnerMessage),
-    nl,
-    halt).
+    (winned(Stacks2) -> 
+    drawStartGenie("Eu Venci! Como esperado, humanos são seres inferiores, tente fazer melhor na próxima vez."),
+    halt; !).
     
 gameVersusPlayer(Stacks, NamePlayer1, NamePlayer2) :-
     makePlayerMove(Stacks, NamePlayer1, Stacks2),
@@ -65,6 +60,5 @@ newStack([H | T], CoinsQuantity, Index, [H | Result]):-
   Index2 is Index - 1,
   newStack(T, CoinsQuantity, Index2, Result).
 
-winned([], true):-!.
-winned([0|T], R) :- winned(T, R), !.
-winned(_, false).
+winned([]):-!.
+winned([0|T]) :- winned(T).
