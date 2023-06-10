@@ -6,11 +6,18 @@
 getPlayerInput(StackList, Msg, PlayerMove):-
     drawGameLoop(StackList, Msg),
     read(_),
+    
     drawGameLoop(StackList, "De qual pilha voce quer retirar as moedas?"),  
     read(InputStack),
 
     drawGameLoop(StackList, "Quantas moedas voce quer retirar?"),
     read(InputCoins),
+    
     InputStack2 is InputStack - 1,
-    (isValidPlay(InputCoins, InputStack2, StackList) -> PlayerMove = [InputCoins, InputStack2]; 
-    getPlayerInput(StackList, "Realize um movimento Válido!", PlayerMove)).
+    isValidPlay(InputCoins, InputStack2, StackList, Msg),
+    (
+        Msg =:= "" ->
+            PlayerMove = [InputCoins, InputStack2]
+        ; 
+            getPlayerInput(StackList, Msg, PlayerMove)
+    ).
