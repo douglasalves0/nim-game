@@ -1,16 +1,16 @@
 % Essa funcao recebe a lista de pilhas do jogo pra poder passar pra o isValidPlay
 % PlayerMove eh uma tuple com as jogadas do jogador
-:- include('../Validade/isValidPlay.pl').
+:- include('../Validate/isValidPlay.pl').
 :- include('../GeniusDraw/DrawingFunctions.pl'). 
 
 getPlayerInput(StackList, Msg, PlayerMove):-
     drawGameLoop(StackList, Msg),
-
+    read(_),
     drawGameLoop(StackList, "De qual pilha voce quer retirar as moedas?"),  
     read(InputStack),
 
     drawGameLoop(StackList, "Quantas moedas voce quer retirar?"),
     read(InputCoins),
-    
-    isValidPlay(InputCoins, InputStack, StackList),
-    PlayerMove is [InputCoins, InputStack - 1].
+    InputStack2 is InputStack - 1,
+    (isValidPlay(InputCoins, InputStack2, StackList) -> PlayerMove = [InputCoins, InputStack2]; 
+    getPlayerInput(StackList, "Realize um movimento Válido!", PlayerMove)).
