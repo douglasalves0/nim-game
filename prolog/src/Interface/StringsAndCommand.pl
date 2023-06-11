@@ -1,21 +1,21 @@
 challengeTypes(Lista) :-
     Lista = [
         "Desafio com 10 moedas --> Fácil:",
-        "     Nesse desafio eu vou pegar leve com você!",
-        "     Vou dividir 10 das minhas moedas em 3 pilhas,",
-        "     vamos começar leve.",
+        "  Nesse desafio eu vou pegar leve com você!",
+        "  Vou dividir 10 das minhas moedas em 3 pilhas,",
+        "  vamos começar leve.",
         "",
         "Desafio com 15 moedas --> Médio:",
-        "     Como eu havia avisado quanto maior a",
-        "     recompensa maior o desafio, nesse serão",
-        "     15 moedas, divididas em 4 pilhas",
-        "     mas não se engane, não será fácil.",
+        "  Como eu havia avisado quanto maior a",
+        "  recompensa maior o desafio, nesse serão",
+        "  15 moedas, divididas em 4 pilhas",
+        "  mas não se engane, não será fácil.",
         "",
         "Desafio com 20 moedas --> Difícil:",
         "",
-        "     Esse eu sei que você nunca irá vencer",
-        "     então irei te oferecer todo o restante das ",
-        "     minhas moedas(20) divididas em 5 pilhas."
+        "  Esse eu sei que você nunca irá vencer",
+        "  então irei te oferecer todo o restante das ",
+        "  minhas moedas(20) divididas em 5 pilhas."
     ].
 
 performsChallenge(Lista) :-
@@ -51,8 +51,7 @@ presentsChallengesTypes(String) :-
     Lista = [
         "Abaixo te apresento os meus desafios, caso esteja com medo de me enfrentar",
         "escolha um outro jogador para dividir essa oportunidade de conquistar as",
-        "minhas criptomoedas!",
-        "[APERTE ENTER PARA CONTINUAR]"
+        "minhas criptomoedas!"
     ],
     atomics_to_string(Lista, ' ', String).
 
@@ -170,7 +169,7 @@ initialPresentation(String) :-
         "Seja bem vindo(a)! Hoje é o seu dia de sorte, quer dizer, depende do",
         "que você considera sorte HAHAHAHAHA. Primeiro tenho que lhe informar",
         "que atualmente não possuo mais desejos para lhe oferecer, entretanto",
-        "gostaria de lhe propor um desafio e em troca você ganhará todas as       ",
+        "gostaria de lhe propor um desafio e em troca você ganhará todas as ",
         "criptomoedas que estiverem disponíveis. Digite uma das opções abaixo."
     ],
     atomic_list_concat(Lista, ' ', String).
@@ -185,7 +184,7 @@ player1Turn(String) :-
 player1Winner(String) :-
     Lista = [
         ", você venceu o desafio!",
-        "Agora você pode levar todas as minhas criptomoedas!         ",
+        "Agora você pode levar todas as minhas criptomoedas! ",
         "Use essa chave para acessar a carteira digital:                                         ",
         "  ----------> Chave de acesso: 86357cd29761145ac5aecaa3b8053f0d2c809b6387ff11a318d4898282db6b3d",
         "Obrigado por me desafiar, me diverti com você!"
@@ -217,8 +216,8 @@ wallet10Title(String) :-
 
 wallet10(Lista) :-
     Lista = [ 
-        "    ¢        ¢       ¢        ¢       ¢       ",
-        "      ¢        ¢       ¢        ¢       ¢       "
+        "    $        $       $        $       $       ",
+        "      $        $       $        $       $       "
     ].
 
 wallet15Title(String) :-
@@ -226,9 +225,9 @@ wallet15Title(String) :-
 
 wallet15(Lista) :-
     Lista = [ 
-        "    ¢        ¢       ¢        ¢       ¢       ",
-        "      ¢        ¢       ¢        ¢       ¢       ",
-        "    ¢        ¢       ¢        ¢       ¢       "
+        "    $        $       $        $       $       ",
+        "      $        $       $        $       $       ",
+        "    $        $       $        $       $       "
     ].
 
 wallet20Title(String) :-
@@ -236,10 +235,10 @@ wallet20Title(String) :-
 
 wallet20(Lista) :-
     Lista = [ 
-         "    ¢        ¢       ¢        ¢       ¢       ",
-        "      ¢        ¢       ¢        ¢       ¢       ",
-        "    ¢        ¢       ¢        ¢       ¢       ",
-        "      ¢        ¢       ¢        ¢       ¢       "
+         "    $       $       $        $       $       ",
+        "      $        $       $        $       $       ",
+        "    $        $       $        $       $       ",
+        "      $        $       $        $       $       "
     ].    
 
 takeStack(String) :-

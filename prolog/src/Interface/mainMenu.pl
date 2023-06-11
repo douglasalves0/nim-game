@@ -40,9 +40,9 @@ mainMenu(OpeningSentence) :-
 
 getMenu(1, OpeningSentence) :-
   clearT,
-  call(PresentsOpponents, PresentsOp),
-  call(OpponentsMenuTitle, OpponentsMT),
-  call(OpponentsMenuOptions, OpponentsMO),
+  call(presentsOpponents, PresentsOp),
+  call(opponentsMenuTitle, OpponentsMT),
+  call(opponentsMenuOptions, OpponentsMO),
   drawMenuGenie(PresentsOp, OpponentsMT, OpponentsMO),
   read(Option1),
   (validateRange(2, Option1) ->
@@ -65,31 +65,31 @@ getMenu(1, OpeningSentence) :-
 
 getMenu(2, OpeningSentence) :-
   clearT,
-  call(PresentsChallengesTypes, PresentsCT),
-  call(ChallengeTypes, ChallengeT),
+  call(presentsChallengesTypes, PresentsCT),
+  call(challengeTypes, ChallengeT),
   drawHintGenie(PresentsCT, ChallengeT),
   read(Option),
-  call(PresentsChallenges, challenges),
-  mainMenu(challenges).
+  call(presentsChallenges, Challenges),
+  mainMenu(Challenges).
 
 getMenu(3, OpeningSentence) :-
   clearT,
-  call(PresentsChallengesPerforms, PresentsCP),
-  call(PerformsChallenge, PerformsC),
+  call(presentsChallengesPerforms, PresentsCP),
+  call(performsChallenge, PerformsC),
   drawHintGenie(PresentsChallengesPerforms, PerformsC),
   read(Option),
   mainMenu(PresentsMainPerforms).
 
 getMenu(4, OpeningSentence) :-
   clearT,
-  call(PresentsWithdrawal, PresentsW),
+  call(presentsWithdrawal, PresentsW),
   drawStartGenie(PresentsW).
 
 getNamePlayer(Phrase, Name) :-
   clearT,
   drawStartGenie(Phrase),
   read(user_input, Name),
-  call(PresentsNameError, NameError),
+  call(presentsNameError, NameError),
   (validateName(Name) -> true ; getNamePlayer(NameError, Name)).
 
 createDifficulty(Phrase) :-
