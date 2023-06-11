@@ -32,13 +32,13 @@ mainMenu(OpeningSentence) :-
   drawMenuGenie(OpeningSentence, Title, Options),
   read(Option),
   (validateRange(4, Option) ->
-    getMenu(Option, OpeningSentence)
+    getMenu(Option)
   ;
     (call(presentsValidEntry, ValidEntryMessage),
     mainMenu(ValidEntryMessage))
   ).
 
-getMenu(1, OpeningSentence) :-
+getMenu(1) :-
   clearT,
   call(presentsOpponents, PresentsOp),
   call(opponentsMenuTitle, OpponentsMT),
@@ -47,40 +47,40 @@ getMenu(1, OpeningSentence) :-
   read(Option1),
   (validateRange(2, Option1) ->
      (Option1 =:= 1 ->
-       call(presentsNamePlayer1, Player1),
-       call(presentsNamePlayer2, Player2),
+       (call(presentsNamePlayer1, Player1),
        getNamePlayer(Player1, NamePlayer1),
+       call(presentsNamePlayer2, Player2),
        getNamePlayer(Player2, NamePlayer2),
        createStack(4, Stack),
-       gameLoop(Stack, 0, NamePlayer1, NamePlayer2)
+       gameLoop(Stack, 0, NamePlayer1, NamePlayer2), !)
      ;
-       call(PresentsChallenges, challenges),
-       createDifficulty(challenges)
-    ),
-    call(PresentsMainMenu, main),
-    mainMenu(main)
-  ;
-    getMenu(1, OpeningSentence)
+     Option1 =:= 2 ->
+      ( call(presentsChallenges, Challenges),
+        createDifficulty(Challenges), !) 
+    )
+    ;
+    getMenu(1)
   ).
 
-getMenu(2, OpeningSentence) :-
+getMenu(2) :-
   clearT,
   call(presentsChallengesTypes, PresentsCT),
   call(challengeTypes, ChallengeT),
   drawHintGenie(PresentsCT, ChallengeT),
   read(Option),
-  call(presentsChallenges, Challenges),
+  call(presentsMainChallenge, Challenges),
   mainMenu(Challenges).
 
-getMenu(3, OpeningSentence) :-
+getMenu(3) :-
   clearT,
   call(presentsChallengesPerforms, PresentsCP),
   call(performsChallenge, PerformsC),
-  drawHintGenie(PresentsChallengesPerforms, PerformsC),
+  drawHintGenie(PresentsCP, PerformsC),
   read(Option),
-  mainMenu(PresentsMainPerforms).
+  call(presentsMainPerforms, Performs),
+  mainMenu(Performs).
 
-getMenu(4, OpeningSentence) :-
+getMenu(4) :-
   clearT,
   call(presentsWithdrawal, PresentsW),
   drawStartGenie(PresentsW).
@@ -88,25 +88,25 @@ getMenu(4, OpeningSentence) :-
 getNamePlayer(Phrase, Name) :-
   clearT,
   drawStartGenie(Phrase),
-  read(user_input, Name),
-  call(presentsNameError, NameError),
-  (validateName(Name) -> true ; getNamePlayer(NameError, Name)).
+  read_line_to_string(user_input, Name),
+  (validateName(Name) -> true , ! ; 
+    (call(presentsNameError, NameError),
+    getNamePlayer(NameError, Name))).
 
 createDifficulty(Phrase) :-
   clearT,
   challengesMenuTitle(Title),
   challengesMenuOptions(Options),
   drawMenuGenie(Phrase, Title, Options),
-  read_line_to_string(user_input, Option2),
-  (validateRange(3, Option2) ->
-    atom_number(Option2, Difficulty),
-    call(PresentsNamePlayer, PhraseNamePlayer),
+  read(Difficulty),
+  (validateRange(3, Difficulty) ->
+    call(presentsNamePlayer, PhraseNamePlayer),
     getNamePlayer(PhraseNamePlayer, Name),
     createStack(Difficulty, Stack),
-    gameLoop(Stack, Difficulty, Name, "")
+    gameLoop(Stack, Difficulty, Name, ""), !
   ;
-    call(PresentsValidEntry, PhraseValidEntry),
-    createDifficulty(PhraseValidEntry)
+    call(presentsValidEntry, PhraseValidEntry),
+    createDifficulty(PhraseValidEntry), !
   ).
 
 createStack(1, Stack) :-

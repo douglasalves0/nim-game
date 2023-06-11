@@ -6,8 +6,7 @@ validateRange(Size, Option) :-
   Option =< Size.
 
 validateRange(_, Option) :-
-  \+ number(Option).
-
+  \+ number(Option), !.
 
 validateName(Name) :-
-  Name \= "".
+  Name \= "", !.
