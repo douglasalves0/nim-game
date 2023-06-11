@@ -5,21 +5,22 @@
 
 getPlayerInput(StackList, Msg, PlayerMove) :-
     drawGameLoop(StackList, Msg),
-    read(_), % Descarta a entrada desnecessária
+    input(_),
 
     drawGameLoop(StackList, "De qual pilha voce quer retirar as moedas?"),  
-    read(InputStack),
-
+    input(InputStack),
     drawGameLoop(StackList, "Quantas moedas voce quer retirar?"),
-    read(InputCoins),
+    input(InputCoins),
     
     isValidPlay(InputCoins, InputStack, StackList, ErrorMsg),
-    write(ErrorMsg),
     string_length(ErrorMsg, L),
     (
         (L =:= 0) ->
-            InputStack2 is InputStack - 1,
-            PlayerMove = [InputCoins, InputStack2]
+            atom_number(InputStack, Stack2),
+            Stack is Stack2 - 1,
+            atom_number(InputCoins, Coins),
+            PlayerMove = [Coins, Stack],
+            !
         ; 
             getPlayerInput(StackList, ErrorMsg, PlayerMove)
     ).

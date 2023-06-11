@@ -273,3 +273,7 @@ clearT :-
 clearT :-
     current_prolog_flag(unix, true), ! ,
     shell('clear'), ! .
+
+input(X) :- 
+  read_line_to_codes(user_input, X2),
+  string_to_atom(X2,X).
