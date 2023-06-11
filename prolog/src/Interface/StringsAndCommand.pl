@@ -80,7 +80,7 @@ presentsOpponents(String) :-
         "caso você queira chamar um amigo para dividir essa oportunidade de ganhar",
         "as minhas criptomoedas, lhe oferecerei 15 moedas. Digite uma das opções."
     ],
-    atomic_list_concat(Lista, '\n', String).
+    atomic_list_concat(Lista, ' ', String).
 
 opponentsMenuTitle(Title) :-
     Title = "DESAFIANTE".
@@ -97,7 +97,7 @@ presentsMainChallenge(String) :-
         "Decida pois não quero perder o meu precioso tempo com pessoas indecisas.",
         "Digite uma das opções abaixo para darmos continuidade ao desafio."
     ],
-    atomic_list_concat(Lista, '\n', String).
+    atomic_list_concat(Lista, ' ', String).
 
 presentsMainPerforms(String) :-
     Lista = [
@@ -105,7 +105,7 @@ presentsMainPerforms(String) :-
         "vamos conferir se é capaz? Decida se já está pronto(a) e digite uma das",
         "opções abaixo."
     ],
-    atomic_list_concat(Lista, '\n', String).
+    atomic_list_concat(Lista, ' ', String).
 
 presentsWithdrawal(String) :-
     String = "Eu já imaginava que você não seria forte o bastante!".
@@ -144,7 +144,7 @@ presentsNamePlayer(String) :-
         "Antes de iniciarmos o desafio, gostaria de saber o seu nome, assim poderei",
         "te chamar pelo nome e não de desafiante. Digite o seu nome abaixo."
     ],
-    atomic_list_concat(Lista, '\n', String).
+    atomic_list_concat(Lista, ' ', String).
 
 presentsNamePlayer1(String) :-
     Lista = [
@@ -152,7 +152,7 @@ presentsNamePlayer1(String) :-
         "saber o seu nome, assim poderei te chamar pelo nome e não de desafiante.",
         "Digite o seu nome abaixo."
     ],
-    atomic_list_concat(Lista, '\n', String).
+    atomic_list_concat(Lista, ' ', String).
 
 presentsNamePlayer2(String) :-
     Lista = [
@@ -160,7 +160,7 @@ presentsNamePlayer2(String) :-
         "saber o seu nome, assim poderei te chamar pelo nome e não de desafiante.",
         "Digite o seu nome abaixo."
     ],
-    atomic_list_concat(Lista, '\n', String).
+    atomic_list_concat(Lista, ' ', String).
 
 presentsNameError(String) :-
     String =  "Digite um nome válido para darmos continuidade ao desafio.".
@@ -168,19 +168,19 @@ presentsNameError(String) :-
 initialPresentation(String) :-
     Lista = [
         "Seja bem vindo(a)! Hoje é o seu dia de sorte, quer dizer, depende do",
-        "que você considera sorte  HAHAHAHAHA. Primeiro tenho que lhe informar",
-        "que atualmente não possuo mais desejos para lhe    oferecer, entretanto",
+        "que você considera sorte HAHAHAHAHA. Primeiro tenho que lhe informar",
+        "que atualmente não possuo mais desejos para lhe oferecer, entretanto",
         "gostaria de lhe propor um desafio e em troca você ganhará todas as       ",
         "criptomoedas que estiverem disponíveis. Digite uma das opções abaixo."
     ],
-    atomic_list_concat(Lista, '\n', String).
+    atomic_list_concat(Lista, ' ', String).
 
 player1Turn(String) :-
     Lista = [
         ", é a sua vez de jogar!                                                                        ",
         "[APERTE ENTER PARA CONTINUAR E INFORMAR SUA JOGADA.]"
     ],
-    atomic_list_concat(Lista, '\n', String).
+    atomic_list_concat(Lista, ' ', String).
 
 player1Winner(String) :-
     Lista = [
@@ -190,7 +190,7 @@ player1Winner(String) :-
         "  ----------> Chave de acesso: 86357cd29761145ac5aecaa3b8053f0d2c809b6387ff11a318d4898282db6b3d",
         "Obrigado por me desafiar, me diverti com você!"
     ],
-    atomic_list_concat(Lista, '\n', String).
+    atomic_list_concat(Lista, ' ', String).
 
 player2Winner(String) :-
     Lista = [
@@ -200,14 +200,14 @@ player2Winner(String) :-
         "  ----------> Chave de acesso: 86357cd29761145ac5aecaa3b8053f0d2c809b6387ff11a318d4898282db6b3d",
         "Agora você quem decide se irá dividir as criptomoedas com o seu amigo ou não."
     ],
-    atomic_list_concat(Lista, '\n', String).
+    atomic_list_concat(Lista, ' ', String).
 
 player2Turn(String) :-
     Lista = [
         ", é a sua vez de jogar!                                                                        ",
         "[APERTE ENTER PARA CONTINUAR E INFORMAR SUA JOGADA.]"
     ],
-    atomic_list_concat(Lista, '\n', String).
+    atomic_list_concat(Lista, ' ', String).
 
 gennieWinner(String) :-
     String =  "Você não conseguiu me vencer, sinto lhe informar mas eu já esperava!".
@@ -266,8 +266,10 @@ presentsValidEntryCoins(String) :-
 presentsValidEntryStackCoins(String) :-
     String =  "Você não pode retirar um valor maior de uma pilha menor.".
 
-clear_terminal :-
+clearT :-
     current_prolog_flag(windows, true), !,
-    shell('cls').
-clear_terminal :-
-    shell('clear').
+    shell('cls'), ! .
+
+clearT :-
+    current_prolog_flag(unix, true), ! ,
+    shell('clear'), ! .
