@@ -19,7 +19,7 @@ getGennie(18,'_,-\' `-_                   \'          ').
 getGennie(19,'`-------\'                             ').
 
 % desenhar o genio
-makeSpace(0):- write("").
+makeSpace(0):- write(""),!.
 makeSpace(N):-
     N2 is N - 1,
     write(" "),
@@ -224,7 +224,7 @@ genieHintLine(Hint,MenuWidth,LineWidth,GenieSize) :-
     atom_chars(Hint,MenuList),
     length(MenuList,MenuLength),
     makeSpace(MenuWidth-MenuLength),write('|'),
-    Nwidth is LineWidth - 4 - MenuWidth - MenuLength,
+    Nwidth is LineWidth - 6 - MenuWidth,
     makeGenie(Nwidth,GenieSize).
 
 % funcoes para desenhar o genio
@@ -240,7 +240,7 @@ drawStartGenie(Text) :-
 drawMenuGenie(Text,MenuName,Menu) :-
     SpeechBubbleSize = 96,
     LineWidth = 110,
-    MenuWidth = 50,
+    MenuWidth = 52,
     split_string(Text, ' ', '', LText),
     startTopSpeechBubble(SpeechBubbleSize),
     startLine(SpeechBubbleSize,LText),
@@ -249,7 +249,7 @@ drawMenuGenie(Text,MenuName,Menu) :-
 drawHintGenie(Text,Hint) :-
     SpeechBubbleSize = 96,
     LineWidth = 110,
-    MenuWidth = 50,
+    MenuWidth = 52,
     split_string(Text, ' ', '', LText),
     startTopSpeechBubble(SpeechBubbleSize),
     startLine(SpeechBubbleSize,LText),
@@ -263,4 +263,3 @@ drawGameLoop(Stack,Text) :-
     startTopSpeechBubble(SpeechBubbleSize),
     startLine(SpeechBubbleSize,LText),
     coinDrawLoop(Stack,LineWidth,GenieSize).
-
