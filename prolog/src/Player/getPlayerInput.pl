@@ -15,8 +15,9 @@ getPlayerInput(StackList, Msg, PlayerMove) :-
     
     isValidPlay(InputCoins, InputStack, StackList, ErrorMsg),
     write(ErrorMsg),
+    string_length(ErrorMsg, L),
     (
-        (ErrorMsg = "") ->
+        (L =:= 0) ->
             InputStack2 is InputStack - 1,
             PlayerMove = [InputCoins, InputStack2]
         ; 

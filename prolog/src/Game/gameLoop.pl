@@ -1,55 +1,78 @@
+:- style_check(-discontiguous).
 :- include('../Engines/useEngine.pl').
 :- include('../GeniusDraw/DrawingFunctions.pl').
 :- include('../Player/GetPlayerInput.pl').
 :- include('../Interface/StringsAndCommand.pl').
-%import Control.Concurrent (threadDelay)
+:- use_module(library('system')).
 
-makePlayerMove(Stacks, NamePlayer, Stacks2) :-
-    concat_atom(["Sua vez ", NamePlayer], Msg),
-    getPlayerInput(Stacks, Msg, [Coins|Stack]),
+makePlayerMove(Stacks, Level, NamePlayer, Stacks2) :-
+    player1Turn(Msg2),
+    concat_atom([NamePlayer, Msg2], Msg),
+    getPlayerInput(Stacks, Msg, Move),
+    nth0(0, Move, Coins),
+    nth0(1, Move, Stack),
     newStack(Stacks, Coins, Stack, Stacks2),
     (winned(Stacks2) -> 
-    concat_atom(["Parabéns ", NamePlayer, "Você venceu!"], WinnerMessage),
-    drawStartGenie(WinnerMessage),
+    drawWinnerPlayer(Level, NamePlayer),
     halt; !).
 
 makeBotMove(Stacks, Level, Stacks2) :-
-    useEngine(Level, Stacks, [Coins|StackL]),
-    nth0(0, StackL, Stack),
-    number_string(Stack, StackStr),
+    useEngine(Level, Stacks, Move),
+    nth0(0, Move, Coins),
+    nth0(1, Move, Stack),
+    Stack2 is Stack + 1,
+    number_string(Stack2, StackStr),
     number_string(Coins, CoinsStr),
     concat_atom(["Hmmm! Vou tirar ", CoinsStr, " moedas da pilha ", StackStr], BotMoveMsg),
-    drawStartGenie(BotMoveMsg),
+    drawGameLoop(Stacks, BotMoveMsg),
+    sleep(4),
     newStack(Stacks, Coins, Stack, Stacks2),
     (winned(Stacks2) -> 
-    drawStartGenie("Eu Venci! Como esperado, humanos são seres inferiores, tente fazer melhor na próxima vez."),
+    gennieWinner(WinnerMsg),
+    drawStartGenie(WinnerMsg),
     halt; !).
     
 gameVersusPlayer(Stacks, NamePlayer1, NamePlayer2) :-
-    makePlayerMove(Stacks, NamePlayer1, Stacks2),
-    makePlayerMove(Stacks2, NamePlayer2, Stacks3),
+    makePlayerMove(Stacks, 0, NamePlayer1, Stacks2),
+    makePlayerMove(Stacks2, 0, NamePlayer2, Stacks3),
     gameVersusPlayer(Stacks3, NamePlayer1, NamePlayer2).
 
 gameVersusBot(Stacks, Level, NamePlayer) :-
-    makePlayerMove(Stacks, NamePlayer, Stacks2),
+    makePlayerMove(Stacks, Level, NamePlayer, Stacks2),
     makeBotMove(Stacks2, Level, Stacks3),
     gameVersusBot(Stacks3, Level, NamePlayer).
 
-/* precisa de StingsAndCommands
-drawWinnerPlayer :: Int -> String -> IO ()
-drawWinnerPlayer 1 namePlayer = do
-  clearT
-  drawMenuGenie (namePlayer ++ player1Winner) wallet10Title wallet10
-drawWinnerPlayer 2 namePlayer = do
-  clearT
-  drawMenuGenie (namePlayer ++ player1Winner) wallet15Title wallet15
-drawWinnerPlayer 3 namePlayer = do
-  clearT
-  drawMenuGenie (namePlayer ++ player1Winner) wallet20Title wallet20
-drawWinnerPlayer x namePlayer = do
-  clearT
-  drawMenuGenie (namePlayer ++ player1Winner) wallet10Title wallet10
-*/
+drawWinnerPlayer(0, NamePlayer) :-
+  player2Winner(WinnerMsg2),
+  concat_atom([NamePlayer, WinnerMsg2], WinnerMsg),
+  wallet15Title(WalletTitle),
+  wallet15(WalletContent),
+  drawMenuGenie(WinnerMsg, WalletTitle, WalletContent),
+  !.
+
+drawWinnerPlayer(1, NamePlayer) :-
+  player1Winner(WinnerMsg2),
+  concat_atom([NamePlayer, WinnerMsg2], WinnerMsg),
+  wallet10Title(WalletTitle),
+  wallet10(WalletContent),
+  drawMenuGenie(WinnerMsg, WalletTitle, WalletContent),
+  !.
+
+drawWinnerPlayer(2, NamePlayer) :-
+  player1Winner(WinnerMsg2),
+  concat_atom([NamePlayer, WinnerMsg2], WinnerMsg),
+  wallet15Title(WalletTitle),
+  wallet15(WalletContent),
+  drawMenuGenie(WinnerMsg, WalletTitle, WalletContent),
+  !.
+
+drawWinnerPlayer(3, NamePlayer) :-
+  player1Winner(WinnerMsg2),
+  concat_atom([NamePlayer, WinnerMsg2], WinnerMsg),
+  wallet20Title(WalletTitle),
+  wallet20(WalletContent),
+  drawMenuGenie(WinnerMsg, WalletTitle, WalletContent),
+  !.
 
 gameLoop(Stacks, Level, NamePlayer1, "") :- gameVersusBot(Stacks, Level, NamePlayer1).
 gameLoop(Stacks, 0, NamePlayer1, NamePlayer2) :- gameVersusPlayer(Stacks, NamePlayer1, NamePlayer2).
