@@ -6,4 +6,6 @@ validateRange(Size, Option2) :-
   Option =< Size.
 
 validateName(Name) :-
-  Name \= "", !.
+  string_length(Name, Len),
+  Len > 0, 
+  !.
