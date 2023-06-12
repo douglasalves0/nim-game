@@ -67,8 +67,6 @@ Link para baixar: https://www.swi-prolog.org/download/stable
 Após isso é possível jogá-lo sem nem precisar compilar, usando esse código dentro da pasta src:
 > swipl -q -f StartGame.pl
 
-Ao executar digite o seguinte comando para inicializar o jogo: 
-> ?- start. 
 
 ---
 # Equipe
