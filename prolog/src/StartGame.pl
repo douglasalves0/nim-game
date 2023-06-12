@@ -4,3 +4,5 @@
 start :- 
     initialPresentation(String),
     initGame(String), halt.
+
+:- start.
