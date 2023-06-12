@@ -59,15 +59,17 @@ Para conseguir executar o código em haskell é necessário baixar a biblioteca 
 Após isso é possível jogá-lo sem nem precisar compilar, usando esse código dentro da pasta src:
 > runghc StartGame.hs
 
----
+
 ## Jogando em **Prolog**
 Para conseguir executar o código em Prolog é recomendável baixar a versão mais atualizada:
 Link para baixar: https://www.swi-prolog.org/download/stable
 
 Após isso é possível jogá-lo sem nem precisar compilar, usando esse código dentro da pasta src:
 > swipl -q -f StartGame.pl
+
 Ao executar digite o seguinte comando para inicializar o jogo: 
 > ?- start. 
+
 ---
 # Equipe
 | Nome                            | Matrícula | E-mail                           |
