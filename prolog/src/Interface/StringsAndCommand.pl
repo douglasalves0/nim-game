@@ -266,8 +266,7 @@ presentsValidEntryStackCoins(String) :-
     String =  "Você não pode retirar um valor maior de uma pilha menor.".
 
 clearT :-
-    current_prolog_flag(windows, true), !,
-    shell('cls'), ! .
+    current_prolog_flag(windows, true),!.
 
 clearT :-
     current_prolog_flag(unix, true), ! ,

@@ -94,9 +94,11 @@ getNamePlayer(Phrase, Name) :-
   drawStartGenie(Phrase),
   input(Name2),
   atom_string(Name2, Name),
-  (validateName(Name) -> true ; 
+  validateName(Name).
+
+getNamePlayer(_, Name) :-
     (call(presentsNameError, NameError),
-    getNamePlayer(NameError, Name))).
+    getNamePlayer(NameError, Name)).
 
 createDifficulty(Phrase) :-
   challengesMenuTitle(Title),
