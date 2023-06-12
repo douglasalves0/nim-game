@@ -8,14 +8,16 @@ initGame(OpeningSentence) :-
   initMenuOptions(Options),
   drawMenuGenie(OpeningSentence, Title, Options),
   input(Option2),
-  validateRange(2, Option2),
-  atom_number(Option2, Option),
-  redirectInitWindow(Option).
-
-initGame(_):-
-  presentsValidEntry(ValidEntryMessage),
-  initGame(ValidEntryMessage),
-  !.
+  (
+    validateRange(2, Option2) ->
+      atom_number(Option2, Option),
+      redirectInitWindow(Option),
+      !
+  ; 
+    presentsValidEntry(ValidEntryMessage),
+    initGame(ValidEntryMessage),
+    !
+  ).
 
 redirectInitWindow(1):-
   presentsMainMenu(MainMenuMessage),
@@ -31,14 +33,16 @@ mainMenu(OpeningSentence) :-
   mainMenuOptions(Options),
   drawMenuGenie(OpeningSentence, Title, Options),
   input(Option2),
-  validateRange(4, Option2),
-  atom_number(Option2, Option),
-  getMenu(Option).
-
-mainMenu(_) :-
-  presentsValidEntry(ValidEntryMessage),
-  mainMenu(ValidEntryMessage),
-  !.
+  (
+    validateRange(4, Option2) ->
+      atom_number(Option2, Option),
+      getMenu(Option),
+      !
+  ; 
+    presentsValidEntry(ValidEntryMessage),
+    mainMenu(ValidEntryMessage),
+    !
+  ).
 
 getMenu(1) :-
   call(presentsOpponents, PresentsOp),
@@ -46,15 +50,14 @@ getMenu(1) :-
   call(opponentsMenuOptions, OpponentsMO),
   drawMenuGenie(PresentsOp, OpponentsMT, OpponentsMO),
   input(Option2),
-  validateRange(2, Option2),
-  atom_number(Option2, Option),
   (
-      validateRange(2, Option2) ->
-          atom_number(Option2, Option),
-          redirectGameMode(Option),
-          !
-      ; 
-          getMenu(1)
+    validateRange(2, Option2) ->
+      atom_number(Option2, Option),
+      redirectGameMode(Option),
+      !
+  ; 
+    getMenu(1),
+    !
   ).
 
 redirectGameMode(1) :-
@@ -92,13 +95,18 @@ getMenu(4) :-
 
 getNamePlayer(Phrase, Name) :-
   drawStartGenie(Phrase),
-  input(Name2),
-  atom_string(Name2, Name),
-  validateName(Name).
-
-getNamePlayer(_, Name) :-
-    (call(presentsNameError, NameError),
-    getNamePlayer(NameError, Name)).
+  input(Name3),
+  atom_string(Name3, Name2),
+  (
+    validateName(Name2) -> 
+      Name = Name2,
+      true, 
+      !
+  ; 
+    presentsNameError(NameError),
+    getNamePlayer(NameError, Name),
+    !
+  ).
 
 createDifficulty(Phrase) :-
   challengesMenuTitle(Title),
