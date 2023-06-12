@@ -58,10 +58,10 @@ presentsChallengesTypes(String) :-
 presentsChallenges(String) :-
     Lista = [
         "Te apresento os meus desafios, se conseguir me vencer você poderá levar",
-        "as criptomoedas respectivas de cada etapa.",
-        "Lembre-se quanto maior o valor, maior a dificuldade! Digite um dos desafios!"
+        "as criptomoedas respectivas de cada etapa. Digite um dos desafios!"
     ],
-    atomics_to_string(Lista, ' ', String).
+    atomics_to_string(Lista, ' ', String),
+    !.
 
 challengesMenuTitle(Title) :-
     Title = "DESAFIOS".

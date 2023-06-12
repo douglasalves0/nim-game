@@ -1,12 +1,9 @@
 :- use_module(library(clpfd)).
 
-validateRange(Size, Option) :-
-  number(Option),
+validateRange(Size, Option2) :-
+  atom_number(Option2, Option),
   Option >= 1,
   Option =< Size.
-
-validateRange(_, Option) :-
-  \+ number(Option), !.
 
 validateName(Name) :-
   Name \= "", !.

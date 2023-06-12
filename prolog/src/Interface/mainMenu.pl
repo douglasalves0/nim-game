@@ -1,105 +1,110 @@
-- include('../Game/gameLoop.pl').
+:- include('../Game/gameLoop.pl').
 :- include('../GeniusDraw/DrawingFunctions.pl').
 :- include('../Interface/StringsAndCommand.pl').
 :- include('../Validate/isValidMenu.pl').
 
 initGame(OpeningSentence) :-
-  clearT,
   initMenuTitle(Title),
   initMenuOptions(Options),
   drawMenuGenie(OpeningSentence, Title, Options),
-  read(Option),
-  (
-    validateRange(2, Option) ->
-    (Option =:= 1 ->
-      (presentsMainMenu(MainMenuMessage),
-       mainMenu(MainMenuMessage))
-    ;
-      Option =:= 2 ->
-      ( clearT,
-        presentsInitialWithdrawal(WithdrawalMessage),
-        drawStartGenie(WithdrawalMessage))
-    )
-  ;
-    presentsValidEntry(ValidEntryMessage),
-    initGame(ValidEntryMessage)
-  ).
+  input(Option2),
+  validateRange(2, Option2),
+  atom_number(Option2, Option),
+  redirectInitWindow(Option).
+
+initGame(_):-
+  presentsValidEntry(ValidEntryMessage),
+  initGame(ValidEntryMessage),
+  !.
+
+redirectInitWindow(1):-
+  presentsMainMenu(MainMenuMessage),
+  mainMenu(MainMenuMessage).
+
+redirectInitWindow(2):-
+  presentsInitialWithdrawal(WithdrawalMessage),
+  drawStartGenie(WithdrawalMessage),
+  halt.
 
 mainMenu(OpeningSentence) :-
-  clearT,
   mainMenuTitle(Title),
   mainMenuOptions(Options),
   drawMenuGenie(OpeningSentence, Title, Options),
-  read(Option),
-  (validateRange(4, Option) ->
-    getMenu(Option)
-  ;
-    (call(presentsValidEntry, ValidEntryMessage),
-    mainMenu(ValidEntryMessage))
-  ).
+  input(Option2),
+  validateRange(4, Option2),
+  atom_number(Option2, Option),
+  getMenu(Option).
+
+mainMenu(_) :-
+  presentsValidEntry(ValidEntryMessage),
+  mainMenu(ValidEntryMessage),
+  !.
 
 getMenu(1) :-
-  clearT,
   call(presentsOpponents, PresentsOp),
   call(opponentsMenuTitle, OpponentsMT),
   call(opponentsMenuOptions, OpponentsMO),
   drawMenuGenie(PresentsOp, OpponentsMT, OpponentsMO),
-  read(Option1),
-  (validateRange(2, Option1) ->
-     (Option1 =:= 1 ->
-       (call(presentsNamePlayer1, Player1),
-       getNamePlayer(Player1, NamePlayer1),
-       call(presentsNamePlayer2, Player2),
-       getNamePlayer(Player2, NamePlayer2),
-       createStack(4, Stack),
-       gameLoop(Stack, 0, NamePlayer1, NamePlayer2), !)
-     ;
-     Option1 =:= 2 ->
-      ( call(presentsChallenges, Challenges),
-        createDifficulty(Challenges), !) 
-    )
-    ;
-    getMenu(1)
+  input(Option2),
+  validateRange(2, Option2),
+  atom_number(Option2, Option),
+  (
+      validateRange(2, Option2) ->
+          atom_number(Option2, Option),
+          redirectGameMode(Option),
+          !
+      ; 
+          getMenu(1)
   ).
 
+redirectGameMode(1) :-
+  presentsNamePlayer1(Player1),
+  getNamePlayer(Player1, NamePlayer1),
+  presentsNamePlayer2(Player2),
+  getNamePlayer(Player2, NamePlayer2),
+  createStack(4, Stack),
+  gameLoop(Stack, 0, NamePlayer1, NamePlayer2).
+
+redirectGameMode(2) :-
+  presentsChallenges(Challenges),
+  createDifficulty(Challenges).
+
 getMenu(2) :-
-  clearT,
   call(presentsChallengesTypes, PresentsCT),
   call(challengeTypes, ChallengeT),
   drawHintGenie(PresentsCT, ChallengeT),
-  read(Option),
+  input(_),
   call(presentsMainChallenge, Challenges),
   mainMenu(Challenges).
 
 getMenu(3) :-
-  clearT,
   call(presentsChallengesPerforms, PresentsCP),
   call(performsChallenge, PerformsC),
   drawHintGenie(PresentsCP, PerformsC),
-  read(Option),
+  input(_),
   call(presentsMainPerforms, Performs),
   mainMenu(Performs).
 
 getMenu(4) :-
-  clearT,
   call(presentsWithdrawal, PresentsW),
-  drawStartGenie(PresentsW).
+  drawStartGenie(PresentsW),
+  halt.
 
 getNamePlayer(Phrase, Name) :-
-  clearT,
   drawStartGenie(Phrase),
-  read_line_to_string(user_input, Name),
-  (validateName(Name) -> true , ! ; 
+  input(Name2),
+  atom_string(Name2, Name),
+  (validateName(Name) -> true ; 
     (call(presentsNameError, NameError),
     getNamePlayer(NameError, Name))).
 
 createDifficulty(Phrase) :-
-  clearT,
   challengesMenuTitle(Title),
   challengesMenuOptions(Options),
   drawMenuGenie(Phrase, Title, Options),
-  read(Difficulty),
-  (validateRange(3, Difficulty) ->
+  input(Difficulty2),
+  (validateRange(3, Difficulty2) ->
+    atom_number(Difficulty2, Difficulty),
     call(presentsNamePlayer, PhraseNamePlayer),
     getNamePlayer(PhraseNamePlayer, Name),
     createStack(Difficulty, Stack),
@@ -107,7 +112,8 @@ createDifficulty(Phrase) :-
   ;
     call(presentsValidEntry, PhraseValidEntry),
     createDifficulty(PhraseValidEntry), !
-  ).
+  ),
+  !.
 
 createStack(1, Stack) :-
   getStacks(10, 3, Stack).

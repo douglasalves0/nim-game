@@ -1,3 +1,5 @@
+:- include('../Interface/StringsAndCommand.pl').
+
 getGennie(1,'\\|  /}      ').
 getGennie(2,'./`|\'\\     ').
 getGennie(3,'|_~?-_`\\   ').
@@ -229,37 +231,45 @@ genieHintLine(Hint,MenuWidth,LineWidth,GenieSize) :-
 
 % funcoes para desenhar o genio
 drawStartGenie(Text) :- 
+    clearT,
     SpeechBubbleSize = 96,
     GenieSize = 19,
     LineWidth = 110,
     split_string(Text, ' ', '', LText),
     startTopSpeechBubble(SpeechBubbleSize),
     startLine(SpeechBubbleSize,LText),
-    fillGenie(LineWidth,GenieSize).
+    fillGenie(LineWidth,GenieSize),
+    !.
 
 drawMenuGenie(Text,MenuName,Menu) :-
+    clearT,
     SpeechBubbleSize = 96,
     LineWidth = 110,
     MenuWidth = 52,
     split_string(Text, ' ', '', LText),
     startTopSpeechBubble(SpeechBubbleSize),
     startLine(SpeechBubbleSize,LText),
-    genieMenu(MenuName,Menu,MenuWidth,LineWidth).
+    genieMenu(MenuName,Menu,MenuWidth,LineWidth),
+    !.
 
 drawHintGenie(Text,Hint) :-
+    clearT,
     SpeechBubbleSize = 96,
     LineWidth = 110,
     MenuWidth = 52,
     split_string(Text, ' ', '', LText),
     startTopSpeechBubble(SpeechBubbleSize),
     startLine(SpeechBubbleSize,LText),
-    genieHint(Hint,MenuWidth,LineWidth).
+    genieHint(Hint,MenuWidth,LineWidth),
+    !.
 
 drawGameLoop(Stack,Text) :-
+    clearT,
     SpeechBubbleSize = 96,
     GenieSize = 19,
     LineWidth = 110,
     split_string(Text, ' ', '', LText),
     startTopSpeechBubble(SpeechBubbleSize),
     startLine(SpeechBubbleSize,LText),
-    coinDrawLoop(Stack,LineWidth,GenieSize).
+    coinDrawLoop(Stack,LineWidth,GenieSize),
+    !.
