@@ -56,11 +56,19 @@ Link para o mapa: https://excalidraw.com/#json=cwhNg7nB5eGvZCaGwaVOZ,P9ILKHqmtWa
 Para conseguir executar o código em haskell é necessário baixar a biblioteca Random
 > cabal install --lib random
 
-Após isso é possível jogá-lo sem nem precisar compilar usando esse código dentro da pasta src:
+Após isso é possível jogá-lo sem nem precisar compilar, usando esse código dentro da pasta src:
 > runghc StartGame.hs
 
 ---
+## Jogando em **Prolog**
+Para conseguir executar o código em Prolog é recomendável baixar a versão mais atualizada:
+Link para baixar: https://www.swi-prolog.org/download/stable
 
+Após isso é possível jogá-lo sem nem precisar compilar, usando esse código dentro da pasta src:
+> swipl -q -f StartGame.pl
+Ao executar digite o seguinte comando para inicializar o jogo: 
+> ?- start. 
+---
 # Equipe
 | Nome                            | Matrícula | E-mail                           |
 | :-----------------------------  | :-------: |  ------------------------------: |
